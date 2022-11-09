@@ -19,7 +19,7 @@ package org.team6;
 /**
  * Class representing a single card that can be used in any standard card game
  */
-public class card {
+public class Card {
     /** Enum representing the suit of the .card (clubs,spades,diamonds,hearts) */
     private suit suit;
     /** Integer value representing the value on the card with 1 being ace and 13 being King */
@@ -34,7 +34,7 @@ public class card {
      * @param value The value of the card being created
      * @param suit the suit of the card being created
      */
-    public card(int value, suit suit){
+    public Card(int value, suit suit){
         this.suit = suit;
         this.value = value;
         if(suit.equals(suit.SPADE) || suit.equals(suit.CLUB))
@@ -42,6 +42,14 @@ public class card {
         else
             this.color = "red";
         this.isFaceUp = false;
+    }
+
+    /**
+     * Simple getter method for color
+     * @return The color of the card
+     */
+    public String getColor(){
+        return this.color;
     }
 
     /**
@@ -76,6 +84,14 @@ public class card {
                 return "King";
         }
         return this.value + "";
+    }
+
+    /**
+     * Simple getter method for value
+     * @return The value of the card (1-13)
+     */
+    public int getIntValue(){
+        return this.value;
     }
 
     /**

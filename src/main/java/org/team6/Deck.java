@@ -17,17 +17,17 @@
 
 package org.team6;
 
-import org.team6.card;
+import org.team6.Card;
 import org.team6.suit;
 
 import java.util.ArrayList;
 
 
 public class Deck {
-    private ArrayList<card> deck;
+    private ArrayList<Card> deck;
 
     public Deck(){
-        this.deck = new ArrayList<card>();
+        this.deck = new ArrayList<Card>();
     }
     /**
      * Preforms an imperfect shuffle of the deck of cards by swapping a card at each index with one in a
@@ -35,7 +35,7 @@ public class Deck {
      */
     public void shuffle(){
         for(int i = 0; i < deck.size(); i++){
-            card temp = deck.get(i);
+            Card temp = deck.get(i);
             int newPos = (int)(Math.random()*deck.size());
             deck.set(i, deck.get(newPos));
             deck.set(newPos,temp);
@@ -43,24 +43,40 @@ public class Deck {
     }
 
     /**
+     * Simulates adding a card to the deck
+     * @param c a card
+     */
+    public void addCard(Card c){
+        deck.add(c);
+    }
+
+    /**
      * Fills a deck with the 52 standard cards used for all card games
      */
     public void fillStandardDeck(){
         for(int i = 1; i <= 13; i++) {
-            deck.add(new card(i, suit.SPADE));
-            deck.add(new card(i, suit.CLUB));
-            deck.add(new card(i, suit.HEART));
-            deck.add(new card(i, suit.DIAMOND));
+            deck.add(new Card(i, suit.SPADE));
+            deck.add(new Card(i, suit.CLUB));
+            deck.add(new Card(i, suit.HEART));
+            deck.add(new Card(i, suit.DIAMOND));
         }
     }
 
     /**
-     * Simulates drawing a card from the deck, returns the org.team6.card and removes it from the deck
+     * Simple getter method for deck
+     * @return An Arraylist of cards representing a deck
      */
-    public void draw() {
-        System.out.println(deck.get(deck.size()-1).getValue() + " of " +
-                deck.get(deck.size()-1).getSuit());
+    public ArrayList<Card> getDeck(){
+        return this.deck;
+    }
+
+    /**
+     * Simulates drawing a card from the deck, returns the card and removes it from the deck
+     */
+    public Card draw() {
+        Card temp = deck.get(deck.size()-1);
         deck.remove(deck.size() - 1);
+        return temp;
     }
 
 }

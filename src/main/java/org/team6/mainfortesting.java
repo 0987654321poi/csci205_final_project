@@ -19,13 +19,24 @@ package org.team6;
 
 import org.team6.Deck;
 
+import java.util.ArrayList;
+
 public class mainfortesting {
     public static void main(String[] args) {
         Deck d = new Deck();
         d.fillStandardDeck();
         d.shuffle();
-        for(int i = 0; i < 52; i++){
-            d.draw();
+        ArrayList<Card> temp = new ArrayList<Card>();
+        for(int i = 0; i < 10; i++){
+            temp.add(d.draw());
         }
+        Pile p = new Pile(temp);
+        Pile p2 = new Pile(new ArrayList<Card>());
+        p2.addCards(p.split(p.getPile().size()-1));
+
+        System.out.println("PILE 1");
+        p.display();
+        System.out.println("PILE 2");
+        p2.display();
     }
 }
