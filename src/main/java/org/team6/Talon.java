@@ -4,12 +4,12 @@
  *
  * Name: Alejandro Vargas
  * Section: 9:00
- * Date: 11/8/2022
- * Time: 10:14 AM
+ * Date: 11/11/2022
+ * Time: 9:00 AM
  *
  * Project: csci205_final_prject
  * Package: org.team6
- * Class: Pile
+ * Class: Talon
  *
  * Description: Class representing the Talon pile
  *
