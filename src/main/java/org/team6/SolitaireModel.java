@@ -19,10 +19,7 @@ package org.team6;
 import java.util.ArrayList;
 
 public class SolitaireModel {
-    ArrayList<Pile> Piles = new ArrayList<>();
 
-    public static void createPiles(){
 
-    }
 
 }

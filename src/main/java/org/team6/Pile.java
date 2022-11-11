@@ -20,18 +20,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Pile {
-    private ArrayList<Card> pile = new ArrayList<Card>();
+    private ArrayList<Card> pile;
 
     /**
      * When instantiating a pile for solitaire it will take in a list of cards and fill the pile,
      * setting the last card to faceUp
      */
     public Pile(ArrayList<Card> cards){
-        for(int i = 0; i < cards.size(); i++) {
-            this.pile.add(cards.get(i));
-            if(i == cards.size() -1)
-                this.pile.get(i).flip();
-        }
+        this.pile = new ArrayList<Card>();
     }
 
     /**
@@ -58,39 +54,23 @@ public class Pile {
 
 
     /**
-     * Adds new cards to the pile if and only if the color is opposite and the value is one less.
+     * Adds new cards to the pile from an Arraylist of cards
      * @param cards an ArrayList of cards
      */
     public void addCards(ArrayList<Card> cards){
-        if(this.pile.size() <= 0 || cards.get(0).getColor() != pile.get(pile.size()-1).getColor() &&
-        cards.get(0).getIntValue() == pile.get(pile.size()-1).getIntValue() - 1){
-            //A card can only be added to an empty pile if it is a king, so if the pile is empty
-            //we must check that the first card in the list is a King
-            if(this.pile.size() == 0 && cards.get(0).getIntValue() == 13) {
-                for (int i = 0; i < cards.size(); i++)
-                    pile.add(cards.get(i));
-            }
-            else if(this.pile.size() > 0){
-                for (int i = 0; i < cards.size(); i++)
-                    pile.add(cards.get(i));
-            }
-        }
+        for (int i = 0; i < cards.size(); i++)
+            pile.add(cards.get(i));
+
     }
 
     /**
-     * Adds new card to the pile if and only if the color is opposite and the value is one less.
-     * @param card a single card
+     * Adds a card to the pile
+     * @param card The card to be added
      */
     public void addCard(Card card){
-        if(this.pile.size() <= 0 || card.getColor() != pile.get(pile.size()-1).getColor() &&
-                card.getIntValue() == pile.get(pile.size()-1).getIntValue() - 1){
-            //A card can only be added to an empty pile if it is a king
-            if(this.pile.size() == 0 && card.getIntValue() == 13)
-                pile.add(card);
-            else if(this.pile.size() > 0)
-                pile.add(card);
-        }
+        this.pile.add(card);
     }
+
 
     /**
      * For testing only
