@@ -30,7 +30,7 @@ public class Card {
     private boolean isFaceUp;
 
     /**
-     * Creates a card given information about the org.team6.suit and value
+     * Creates a card given information about the suit and value
      * @param value The value of the card being created
      * @param suit the suit of the card being created
      */
