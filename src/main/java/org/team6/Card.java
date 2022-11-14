@@ -113,7 +113,7 @@ public class Card {
     }
 }
 
-/** Enum representing the suit of the card (clubs,spades,diamonds,hearts) */
+/** Enum representing the suit of the card (Clubs,Spades,Diamonds,Hearts) */
 enum suit{
     SPADE,
     DIAMOND,
