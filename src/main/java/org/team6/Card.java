@@ -30,7 +30,7 @@ public class Card {
     private boolean isFaceUp;
 
     /**
-     * Creates a card given information about the org.team6.suit and value
+     * Creates a card given information about the suit and value
      * @param value The value of the card being created
      * @param suit the suit of the card being created
      */
@@ -113,7 +113,7 @@ public class Card {
     }
 }
 
-/** Enum representing the suit of the card (clubs,spades,diamonds,hearts) */
+/** Enum representing the suit of the card (Clubs,Spades,Diamonds,Hearts) */
 enum suit{
     SPADE,
     DIAMOND,

@@ -19,38 +19,30 @@ package org.team6;
 import java.util.ArrayList;
 
 public class Tableau {
-    private GameType gameType;
     private ArrayList<Pile> piles;
 
     /**
      * Constructs a Tableau
-     * @param gt sets the private variable for the type of game, as this will impact how many
-     *          cards go in the tableau
      */
-    public Tableau(GameType gt){
-        this.gameType = gt;
+    public Tableau(){
+        this.piles = new ArrayList<Pile>();
     }
 
     /**
      * Creates the piles that make up the tableau
      */
-    public void createPiles(Deck d) {
-        if(this.gameType.equals(GameType.CLASSIC)) {
-            for (int i = 0; i < 7; i++) {
-                piles.add(new Pile(new ArrayList<Card>()));
-            }
-            int limit = 1;
-            for (Pile p : this.piles) {
-                for (int i = 0; i < 1; i++) {
-                    p.addCard(d.draw());
-                }
-                limit++;
-            }
+    public void createPiles(int numPiles) {
+        for (int i = 0; i < numPiles; i++) {
+            piles.add(new Pile(new ArrayList<Card>()));
         }
     }
-}
 
-enum GameType{
-    CLASSIC
+    /**
+     * Fills a piles in the tableau given an index
+     * @param index the position of the pile within the tableau
+     */
+    public void fillPile(int index, ArrayList<Card> cards){
+        piles.get(index).addCards(cards);
+    }
 }
 
