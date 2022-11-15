@@ -19,7 +19,39 @@ package org.team6;
 import java.util.ArrayList;
 
 public class SolitaireModel {
+    /**
+     * Attempts to move a selected pile to a new location, if valid
+     * @param from the selected pile
+     * @param to the new location pile
+     * @return true if the move is successful,
+     * @return false if unsuccessful
+     */
+    public static boolean moveTo( Pile from, Pile to) {
+        return false; //TODO MAKE moveTo
+    }
 
+    /**
+     * determines based on the piles class instance if the new location is valid
+     * @param from the selected pile
+     * @param to the new location pile
+     * @return true if the move is valid
+     * @return false if invalid
+     */
+    private static boolean isValidLocation( Pile from, Pile to) {
+        return false; //TODO MAKE isValidLocation
+    }
 
+    /**
+     * undoes all actions made in the current instance, and reverts it to the previous instance.
+     */
+    public static void undo() {
 
+    }
+
+    /**
+     * 'selects' a card, currently unsure how this will function later
+     */
+    public static void select() {
+
+    }
 }
