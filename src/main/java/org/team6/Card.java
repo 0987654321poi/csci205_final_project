@@ -16,6 +16,8 @@
  * *****************************************/
 package org.team6;
 
+import java.io.File;
+
 /**
  * Class representing a single card that can be used in any standard card game
  */
@@ -28,6 +30,12 @@ public class Card {
     private String color;
     /** Boolean representing whether the card is face up or face down */
     private boolean isFaceUp;
+
+    /** Image file unique to one of the 52 possible cards */
+    private File associatedImage;
+
+    /** Image file depicting the back of a card*/
+    private File cardBack = new File("CardBack.png");
 
     /**
      * Creates a card given information about the suit and value
@@ -42,7 +50,21 @@ public class Card {
         else
             this.color = "red";
         this.isFaceUp = false;
+        this.associatedImage = new File(this.getValue() + "of" + this.getSuit() + ".png");
     }
+
+    /**
+     * Returns the image of this card
+     * @return The image associated with this card in the face up position or the image of the
+     * back of a card
+     */
+    public File getAssociatedImage(){
+        if(getIsFaceUp())
+            return this.associatedImage;
+        else
+            return this.cardBack;
+    }
+
 
     /**
      * Simple getter method for color
@@ -63,7 +85,7 @@ public class Card {
      * returns which way the card is facing
      * @return isFaceUP, the boolean representing whether the card is face up or down
      */
-    public boolean getIsFaceUP(){
+    public boolean getIsFaceUp(){
         return this.isFaceUp;
     }
 
