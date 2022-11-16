@@ -45,11 +45,36 @@ public class SolitaireModel {
      */
     private Deck theDeck;
 
+    /**
+     * The number of piles in the tableau
+     */
+    private final int NUM_PILES = 7;
+
     public SolitaireModel(){
         theDeck = new Deck();
         theDeck.fillStandardDeck();
+        theDeck.shuffle();
         theStock = new Stock(theDeck.getDeck());
+        theTab = new Tableau();
+        theTab.createPiles(NUM_PILES);
+        for (int i = 0; i < NUM_PILES; i++) {
+            ArrayList<Card> temp = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                temp.add(theStock.drawCard());
+            }
+            theTab.fillPile(i, temp);
+            theTab.getTopCardFromPile(i).flip();
+        }
 
+    }
+
+    public static void main(String[] args) {
+        SolitaireModel model = new SolitaireModel();
+        for (int i = 0; i < model.NUM_PILES; i++) {
+            model.theTab.piles.get(i).display();
+            System.out.println();
+        }
+        System.out.println(model.theDeck.getDeck().size());
     }
 
 }
