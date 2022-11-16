@@ -20,6 +20,36 @@ import java.util.ArrayList;
 
 public class SolitaireModel {
 
+    /**
+     * The stock for our solitaire game
+     */
+    private Stock theStock;
 
+    /**
+     * The talon for our solitaire game
+     */
+    private Talon theTalon;
+
+    /**
+     * The tableau for our solitaire game
+     */
+    private Tableau theTab;
+
+    /**
+     * The foundations for our solitaire game
+     */
+    private Foundations theFoundations;
+
+    /**
+     * The deck for our solitaire game
+     */
+    private Deck theDeck;
+
+    public SolitaireModel(){
+        theDeck = new Deck();
+        theDeck.fillStandardDeck();
+        theStock = new Stock(theDeck.getDeck());
+
+    }
 
 }
