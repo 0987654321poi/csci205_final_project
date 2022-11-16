@@ -37,7 +37,7 @@ public class Pile {
      */
     public ArrayList<Card> split(int index){
         ArrayList<Card> newPile = new ArrayList<Card>();
-        if(this.pile.get(index).getIsFaceUP()){
+        if(this.pile.get(index).getIsFaceUp()){
             for(int i = index; i < pile.size(); i++){
                 newPile.add(pile.get(i));
                 pile.remove(i);
@@ -77,7 +77,7 @@ public class Pile {
      */
     public void display(){
         for(Card c : this.pile){
-            if(c.getIsFaceUP() == false)
+            if(c.getIsFaceUp() == false)
                 System.out.println("UNKNOWN");
             else
                 System.out.println(c.getValue() + " of " + c.getSuit());
