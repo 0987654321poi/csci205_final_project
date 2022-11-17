@@ -16,7 +16,11 @@
  * *****************************************/
 package org.team6;
 
+import javafx.scene.image.Image;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * Class representing a single card that can be used in any standard card game
@@ -32,10 +36,10 @@ public class Card {
     private boolean isFaceUp;
 
     /** Image file unique to one of the 52 possible cards */
-    private File associatedImage;
+    private Image associatedImage;
 
     /** Image file depicting the back of a card*/
-    private File cardBack = new File("CardBack.png");
+    private Image cardBack;
 
     /**
      * Creates a card given information about the suit and value
@@ -50,15 +54,23 @@ public class Card {
         else
             this.color = "red";
         this.isFaceUp = false;
-        this.associatedImage = new File(this.getValue() + "of" + this.getSuit() + ".png");
+        try {
+            this.associatedImage = new Image(new FileInputStream(this.getValue() + "of" + this.getSuit() + ".png"));
+            this.cardBack = new Image(new FileInputStream("CardBack.png"));
+        }
+        catch(FileNotFoundException E){
+            //This should never happen as all files are named and accounted for
+        }
     }
+
+
 
     /**
      * Returns the image of this card
      * @return The image associated with this card in the face up position or the image of the
      * back of a card
      */
-    public File getAssociatedImage(){
+    public Image getAssociatedImage(){
         if(getIsFaceUp())
             return this.associatedImage;
         else
