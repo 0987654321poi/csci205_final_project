@@ -56,6 +56,8 @@ public class SolitaireModel {
         theDeck.shuffle();
         theStock = new Stock(theDeck.getDeck());
         theTab = new Tableau();
+        //Creates the 7 piles that form the stock in a game of Solitaire, fills them with 1, 2, 3,
+        //4, 5, 6, and 7 cards according to their position, flips the final card in the pile
         theTab.createPiles(NUM_PILES);
         for (int i = 0; i < NUM_PILES; i++) {
             ArrayList<Card> temp = new ArrayList<>();
