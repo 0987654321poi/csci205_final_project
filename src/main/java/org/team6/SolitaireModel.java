@@ -19,6 +19,26 @@ package org.team6;
 import java.util.ArrayList;
 
 public class SolitaireModel {
+
+    /**
+     * which card was selected first during a moveset
+     */
+    private static Pile selectedFirst;
+
+
+    /**
+     * which card was selected second (last) during a moveset
+     */
+    private static Pile selectedSecond;
+
+    /**
+     * the constructor for the Solitaire Model
+     */
+    public SolitaireModel() {
+        this.selectedFirst=null;
+        this.selectedSecond=null;
+    }
+
     /**
      * Attempts to move a selected pile to a new location, if valid
      * @param from the selected pile
@@ -51,7 +71,15 @@ public class SolitaireModel {
     /**
      * 'selects' a card, currently unsure how this will function later
      */
-    public static void select() {
-
+    public static void select(Pile selectedCards) {
+        if (selectedFirst == null) {
+            selectedFirst = selectedCards;
+        }
+        else if(selectedFirst != null) {
+            selectedSecond = selectedCards;
+            /*if(isValidLocation(selectedFirst.getInPile(),selectedSecond.getInPile())){
+                moveTo(selectedFirst.getInPile(),selectedSecond.getInPile());
+            }*/
+        }
     }
 }
