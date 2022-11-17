@@ -83,4 +83,8 @@ public class Pile {
                 System.out.println(c.getValue() + " of " + c.getSuit());
         }
     }
+
+    public Card getTopCard(){
+        return pile.get(pile.size()-1);
+    }
 }

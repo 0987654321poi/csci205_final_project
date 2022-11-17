@@ -19,7 +19,7 @@ package org.team6;
 import java.util.ArrayList;
 
 public class Tableau {
-    private ArrayList<Pile> piles;
+    public ArrayList<Pile> piles;
 
     /**
      * Constructs a Tableau
@@ -43,6 +43,10 @@ public class Tableau {
      */
     public void fillPile(int index, ArrayList<Card> cards){
         piles.get(index).addCards(cards);
+    }
+
+    public Card getTopCardFromPile(int index){
+        return piles.get(index).getTopCard();
     }
 }
 
