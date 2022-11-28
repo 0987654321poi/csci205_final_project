@@ -73,6 +73,15 @@ public class Pile {
 
 
     /**
+     * locates a card in the Pile ArrayList
+     * @param card
+     * @return
+     */
+    public int indexOf(Card card) {
+        return 0;
+    }
+
+    /**
      * For testing only
      */
     public void display(){

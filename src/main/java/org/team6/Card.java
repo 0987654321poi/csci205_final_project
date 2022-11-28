@@ -29,6 +29,12 @@ public class Card {
     /** Boolean representing whether the card is face up or face down */
     private boolean isFaceUp;
 
+    /** Holds a reference to which pile the Card is in. **/
+    private Pile inPile;
+
+    /** Boolean representing if the card is in a 'selected' state **/
+    private boolean isSelected;
+
     /**
      * Creates a card given information about the suit and value
      * @param value The value of the card being created
@@ -42,6 +48,8 @@ public class Card {
         else
             this.color = "red";
         this.isFaceUp = false;
+        this.inPile = null;
+        this.isSelected = false;
     }
 
     /**
@@ -111,7 +119,14 @@ public class Card {
         }
         return "";
     }
+
+    /** getter method for inPile **/
+    public Pile getInPile() {
+        return this.inPile;
+    }
 }
+
+
 
 /** Enum representing the suit of the card (Clubs,Spades,Diamonds,Hearts) */
 enum suit{
