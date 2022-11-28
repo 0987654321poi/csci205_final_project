@@ -19,13 +19,21 @@ package org.team6;
 import java.util.ArrayList;
 
 public class Tableau {
-    public ArrayList<Pile> piles;
+    private ArrayList<Pile> piles;
 
     /**
      * Constructs a Tableau
      */
     public Tableau(){
         this.piles = new ArrayList<Pile>();
+    }
+
+    /**
+     * Getter method for piles
+     * @return piles
+     */
+    public ArrayList<Pile> getPiles(){
+        return this.piles;
     }
 
     /**

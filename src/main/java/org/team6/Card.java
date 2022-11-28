@@ -130,21 +130,11 @@ public class Card {
     }
 
     /**
-     * Returns the suit of the card in the form of a String
+     * Returns the suit of the card as an enum
      * @return The suit of the card
      */
-    public String getSuit() {
-        switch(this.suit){
-            case CLUB:
-                return "Clubs";
-            case HEART:
-                return "Hearts";
-            case SPADE:
-                return "Spades";
-            case DIAMOND:
-                return "Diamonds";
-        }
-        return "";
+    public suit getSuit() {
+        return this.suit;
     }
 }
 
