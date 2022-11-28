@@ -120,6 +120,7 @@ public class Card {
         return this.value + "";
     }
 
+
     /**
      * Simple getter method for value
      * @return The value of the card (1-13)

@@ -28,6 +28,9 @@ import javafx.scene.layout.VBox;
 
 public class SolitaireController {
 
+    /**The model*/
+    private SolitaireModel theModel;
+
     @FXML
     private ResourceBundle resources;
 
@@ -103,7 +106,15 @@ public class SolitaireController {
         assert lblTime != null : "fx:id=\"lblTime\" was not injected: check your FXML file 'solitaire.fxml'.";
 
     }
+    private void initEventHandlers(){
 
+    }
 
+    public void setModel(SolitaireModel model){
+        this.theModel = model;
+
+        initEventHandlers();
+
+    }
 
 }

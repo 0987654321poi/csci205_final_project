@@ -50,10 +50,14 @@ public class SolitaireModel {
      */
     private final int NUM_PILES = 7;
 
+    /**
+     * Creates a new solitaire model with a full shuffled deck and a properly sized
+     * tableau. Also instantiates a new talon, stock, and the foundations.
+     */
     public SolitaireModel(){
         theDeck = new Deck();
         theDeck.fillStandardDeck();
-        theDeck.shuffle();
+        //theDeck.shuffle();
         theStock = new Stock(theDeck.getDeck());
         theTab = new Tableau();
         //Creates the 7 piles that form the stock in a game of Solitaire, fills them with 1, 2, 3,
@@ -67,16 +71,42 @@ public class SolitaireModel {
             theTab.fillPile(i, temp);
             theTab.getTopCardFromPile(i).flip();
         }
+        theFoundations = new Foundations();
+        theTalon = new Talon();
 
+    }
+
+    /**
+     * Moves a given card into a tableau pile if the card is the appropriate type
+     * @param pile - the pile being added to the tableau
+     * @param tabNumber - the number of the tableau pile that the card is being added to
+     */
+    public void moveCardToTableau(Pile pile, int tabNumber) {
+        Card card = pile.getBottomCard();
+        Card topCard = theTab.piles.get(tabNumber).getTopCard();
+        if(!(topCard.getColor().equals(card.getColor()))
+        &&  topCard.getIntValue() == card.getIntValue()+1){
+            if(!card.getIsFaceUp()){
+                card.flip();
+            }
+            theTab.piles.get(tabNumber).addCards(pile.getPile());
+        }
     }
 
     public static void main(String[] args) {
         SolitaireModel model = new SolitaireModel();
+        Card sample = new Card(6, suit.HEART);
+        Pile sampPile = new Pile();
+        sampPile.addCard(sample);
+        Card card2 = new Card(5, suit.SPADE);
+        card2.flip();
+        sampPile.addCard(card2);
+        model.moveCardToTableau(sampPile, 6);
         for (int i = 0; i < model.NUM_PILES; i++) {
             model.theTab.piles.get(i).display();
             System.out.println();
         }
-        System.out.println(model.theDeck.getDeck().size());
+
     }
 
 }

@@ -27,6 +27,13 @@ public class Pile {
      * setting the last card to faceUp
      */
     public Pile(ArrayList<Card> cards){
+        this.pile = cards;
+    }
+
+    /**
+     * Creates a new pile, but does not makes the pile empty
+     */
+    public Pile(){
         this.pile = new ArrayList<Card>();
     }
 
@@ -84,7 +91,18 @@ public class Pile {
         }
     }
 
+    /**
+     * Returns the top card on the pile
+     * @return the top card on the pile
+     */
     public Card getTopCard(){
         return pile.get(pile.size()-1);
     }
+
+    /**
+     *
+     * @return the bottom card on the pile
+     */
+    public Card getBottomCard(){return pile.get(0);}
+
 }
