@@ -33,22 +33,20 @@ public class Foundations {
     /**
      * Method for adding a card to the proper foundation
      * the model will handle if the card cannot be added by the game rules
+     *
      * @param card to be added to the foundation
      */
-    public void addCard(Card card){
-        if(card.getSuit().equals(suit.HEART)){
+    public void addCard(Card card, suit Suit) {
+        if (Suit.equals(suit.HEART)) {
             this.hearts.add(card);
-        }
-        else if(card.getSuit().equals(suit.DIAMOND)){
+        } else if (Suit.equals(suit.DIAMOND)) {
             this.diamonds.add(card);
-        }
-        else if(card.getSuit().equals(suit.SPADE)){
+        } else if (Suit.equals(suit.SPADE)) {
             this.spades.add(card);
-        }
-        else{
+        } else if (Suit.equals(suit.CLUB))
             this.clubs.add(card);
-        }
     }
+
 
     /**
      * Method to tell whether the game has been completed and all the foundations are full
@@ -67,7 +65,7 @@ public class Foundations {
     }
 
     /**
-     * Meathod to pull a card from the foundation so that it can be moved back onto
+     * Method to pull a card from the foundation so that it can be moved back onto
      * a tableau pile
      * @param type, the suit of the foundation you want to pull from
      * @return the card at the top of that foundation
@@ -99,6 +97,27 @@ public class Foundations {
             }
         }
         return out;
+    }
+
+    /**
+     * Returns the top card from the foundations of a given suit
+     * @param Suit the suit of the card
+     * @return a card object
+     */
+    public Card getTopCard(suit Suit){
+        if (Suit.equals(suit.HEART)) {
+            return hearts.get(hearts.size()-1);
+        }
+        else if (Suit.equals(suit.DIAMOND)) {
+            return diamonds.get(diamonds.size()-1);
+        }
+        else if (Suit.equals(suit.SPADE)) {
+            return spades.get(spades.size()-1);
+        }
+        else if (Suit.equals(suit.CLUB)) {
+            return clubs.get(clubs.size()-1);
+        }
+        return null;
     }
 
     public Card getTopHeart() {
