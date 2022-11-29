@@ -70,6 +70,32 @@ public class SolitaireModel {
 
 
     /**
+     * takes the selected card and flips it if the card is face down
+     * @param selectedCard
+     */
+    public static void flipCard(Card selectedCard) {
+        if(selectedCard.getIsFaceUP() == false) {
+            selectedCard.flip();
+        }
+    }
+
+    /**
+     * Searches a new placement for the selected card. The game attempts to
+     * @param selectedCard
+     * @return
+     */
+    public static boolean autoMoveCard(Card selectedCard) {
+        //temporary: is the card on top? continue if yes, return false if no
+        //TODO check for valid position to move
+        //Can it be placed in Foundations?
+        //TODO check for valid Foundation spots
+        //Can it be moved to somewhere else in the Tableau?
+        //TODO check for valid Tableau spots
+        //if neither is true, return false
+        return false;
+    }
+
+    /**
      * 'selects' a card, currently unsure how this will function later
      */
     public static void select(Card selectedCard) {

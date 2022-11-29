@@ -75,6 +75,7 @@ public class Card {
         return this.isFaceUp;
     }
 
+
     /**
      * Returns the value of the card as a String, if the card is a face card it will return a word,
      * otherwise it will return a number in the form of a String
