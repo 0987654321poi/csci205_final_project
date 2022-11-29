@@ -31,12 +31,16 @@ public class SolitaireModel {
      */
     private static Pile selectedSecond;
 
+    /** the game instance being interacted with by the Model */
+    private static Game theGame;
+
     /**
      * the constructor for the Solitaire Model
      */
     public SolitaireModel() {
         this.selectedFirst=null;
         this.selectedSecond=null;
+        this.theGame = new Game();
     }
 
     /**
