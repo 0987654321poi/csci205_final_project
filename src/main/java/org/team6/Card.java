@@ -21,7 +21,7 @@ package org.team6;
  */
 public class Card {
     /** Enum representing the suit of the .card (clubs,spades,diamonds,hearts) */
-    private suit suit;
+    private Suit suit;
     /** Integer value representing the value on the card with 1 being ace and 13 being King */
     private int value;
     /** String representing the color of the card, red or black */
@@ -40,7 +40,7 @@ public class Card {
      * @param value The value of the card being created
      * @param suit the suit of the card being created
      */
-    public Card(int value, suit suit){
+    public Card(int value, Suit suit){
         this.suit = suit;
         this.value = value;
         if(suit.equals(suit.SPADE) || suit.equals(suit.CLUB))
@@ -71,7 +71,7 @@ public class Card {
      * returns which way the card is facing
      * @return isFaceUP, the boolean representing whether the card is face up or down
      */
-    public boolean getIsFaceUP(){
+    public boolean getIsFaceUp(){
         return this.isFaceUp;
     }
 
@@ -104,21 +104,11 @@ public class Card {
     }
 
     /**
-     * Returns the suit of the card in the form of a String
+     * Returns the suit of the card
      * @return The suit of the card
      */
-    public String getSuit() {
-        switch(this.suit){
-            case CLUB:
-                return "Clubs";
-            case HEART:
-                return "Hearts";
-            case SPADE:
-                return "Spades";
-            case DIAMOND:
-                return "Diamonds";
-        }
-        return "";
+    public Suit getSuit() {
+        return this.suit;
     }
 
     /** getter method for inPile **/
@@ -130,7 +120,7 @@ public class Card {
 
 
 /** Enum representing the suit of the card (Clubs,Spades,Diamonds,Hearts) */
-enum suit{
+enum Suit {
     SPADE,
     DIAMOND,
     CLUB,

@@ -74,7 +74,7 @@ public class SolitaireModel {
      * @param selectedCard
      */
     public static void flipCard(Card selectedCard) {
-        if(selectedCard.getIsFaceUP() == false) {
+        if(selectedCard.getIsFaceUp() == false) {
             selectedCard.flip();
         }
     }

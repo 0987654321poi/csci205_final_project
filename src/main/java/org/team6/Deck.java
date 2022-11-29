@@ -17,9 +17,6 @@
 
 package org.team6;
 
-import org.team6.Card;
-import org.team6.suit;
-
 import java.util.ArrayList;
 
 
@@ -55,10 +52,10 @@ public class Deck {
      */
     public void fillStandardDeck(){
         for(int i = 1; i <= 13; i++) {
-            deck.add(new Card(i, suit.SPADE));
-            deck.add(new Card(i, suit.CLUB));
-            deck.add(new Card(i, suit.HEART));
-            deck.add(new Card(i, suit.DIAMOND));
+            deck.add(new Card(i, Suit.SPADE));
+            deck.add(new Card(i, Suit.CLUB));
+            deck.add(new Card(i, Suit.HEART));
+            deck.add(new Card(i, Suit.DIAMOND));
         }
     }
 
