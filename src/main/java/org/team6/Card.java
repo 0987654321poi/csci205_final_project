@@ -16,12 +16,18 @@
  * *****************************************/
 package org.team6;
 
+import javafx.scene.image.Image;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 /**
  * Class representing a single card that can be used in any standard card game
  */
 public class Card {
     /** Enum representing the suit of the .card (clubs,spades,diamonds,hearts) */
-    private Suit suit;
+    private suit suit;
     /** Integer value representing the value on the card with 1 being ace and 13 being King */
     private int value;
     /** String representing the color of the card, red or black */
@@ -29,18 +35,18 @@ public class Card {
     /** Boolean representing whether the card is face up or face down */
     private boolean isFaceUp;
 
-    /** Holds a reference to which pile the Card is in. **/
-    private Pile inPile;
+    /** Image file unique to one of the 52 possible cards */
+    private Image associatedImage;
 
-    /** Boolean representing if the card is in a 'selected' state **/
-    private boolean isSelected;
+    /** Image file depicting the back of a card*/
+    private Image cardBack;
 
     /**
      * Creates a card given information about the suit and value
      * @param value The value of the card being created
      * @param suit the suit of the card being created
      */
-    public Card(int value, Suit suit){
+    public Card(int value, suit suit){
         this.suit = suit;
         this.value = value;
         if(suit.equals(suit.SPADE) || suit.equals(suit.CLUB))
@@ -48,9 +54,29 @@ public class Card {
         else
             this.color = "red";
         this.isFaceUp = false;
-        this.inPile = null;
-        this.isSelected = false;
+        try {
+            this.associatedImage = new Image(new FileInputStream(this.getValue() + "of" + this.getSuit() + ".png"));
+            this.cardBack = new Image(new FileInputStream("CardBack.png"));
+        }
+        catch(FileNotFoundException E){
+            //This should never happen as all files are named and accounted for
+        }
     }
+
+
+
+    /**
+     * Returns the image of this card
+     * @return The image associated with this card in the face up position or the image of the
+     * back of a card
+     */
+    public Image getAssociatedImage(){
+        if(getIsFaceUp())
+            return this.associatedImage;
+        else
+            return this.cardBack;
+    }
+
 
     /**
      * Simple getter method for color
@@ -75,7 +101,6 @@ public class Card {
         return this.isFaceUp;
     }
 
-
     /**
      * Returns the value of the card as a String, if the card is a face card it will return a word,
      * otherwise it will return a number in the form of a String
@@ -95,6 +120,7 @@ public class Card {
         return this.value + "";
     }
 
+
     /**
      * Simple getter method for value
      * @return The value of the card (1-13)
@@ -104,23 +130,31 @@ public class Card {
     }
 
     /**
-     * Returns the suit of the card
+     * Returns the suit of the card as an enum
      * @return The suit of the card
      */
-    public Suit getSuit() {
+    public suit getSuit() {
         return this.suit;
     }
 
-    /** getter method for inPile **/
-    public Pile getInPile() {
-        return this.inPile;
+    public String getSuitAsString(){
+        if(this.suit == org.team6.suit.HEART){
+            return "Hearts";
+        }
+        else if(this.suit == org.team6.suit.SPADE){
+            return "Spades";
+        }
+        else if(this.suit == org.team6.suit.CLUB){
+            return "Clubs";
+        }
+        else{
+            return "Diamonds";
+        }
     }
 }
 
-
-
 /** Enum representing the suit of the card (Clubs,Spades,Diamonds,Hearts) */
-enum Suit {
+enum suit{
     SPADE,
     DIAMOND,
     CLUB,

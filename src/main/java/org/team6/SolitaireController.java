@@ -18,13 +18,21 @@
 
 package org.team6;
 
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import javax.imageio.ImageIO;
 
 public class SolitaireController {
 
@@ -107,12 +115,10 @@ public class SolitaireController {
 
     }
     private void initEventHandlers(){
-
     }
 
     public void setModel(SolitaireModel model){
         this.theModel = model;
-
         initEventHandlers();
 
     }
