@@ -44,6 +44,18 @@ public class SolitaireModel {
     }
 
     /**
+     * determines based on the piles class instance if the new location is valid
+     * @param from the selected pile
+     * @param to the new location pile
+     * @return true if the move is valid
+     * @return false if invalid
+     */
+    private static boolean isValidLocation( Card from, Card to) {
+        return false; //TODO isValidLocation
+       // if (to.getIsIn() instanceof )
+    }
+
+    /**
      * Attempts to move a selected pile to a new location, if valid
      * @param from the selected pile
      * @param to the new location pile
@@ -53,25 +65,6 @@ public class SolitaireModel {
     public static boolean moveTo( Pile from, Pile to) {
         return false; //TODO MAKE moveTo
     }
-
-    /**
-     * determines based on the piles class instance if the new location is valid
-     * @param from the selected pile
-     * @param to the new location pile
-     * @return true if the move is valid
-     * @return false if invalid
-     */
-    private static boolean isValidLocation( Pile from, Pile to) {
-        return false; //TODO MAKE isValidLocation
-    }
-
-    /**
-     * undoes all actions made in the current instance, and reverts it to the previous instance.
-     */
-    public static void undo() {
-
-    }
-
 
     /**
      * takes the selected card and flips it if the card is face down
@@ -89,7 +82,8 @@ public class SolitaireModel {
     }
 
     /**
-     * Searches a new placement for the selected card. The game attempts to
+     * Searches a new placement for the selected card.
+     * The game attempts to do this automatically, only requiring the clicking of the card.
      * @param selectedCard
      * @return
      */
@@ -105,4 +99,46 @@ public class SolitaireModel {
     }
 
 
+
+
+    //----------------------------------=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+
+    /**
+     * undoes all actions made in the current instance, and reverts it to the previous instance.
+     */
+    public static void undo() {
+
+    }
+    /*
+    /**
+     * 'selects' a card, currently unsure how this will function later
+
+    public static void select(Card selectedCard) {
+        //Create a Pile of Cards from the selected Card by splitting its pile location downward
+
+        Object pileOfSelectedCard = selectedCard.getIsIn(); //a fast reference to the Cards OG Pile Location
+
+        //gather the cards beneath the selected card in an arraylist
+        ArrayList<Card> selectedCards = pileOfSelectedCard.split(pileOfSelectedCard.getPile().indexOf(selectedCard));
+
+        
+        for (Card card : selectedCards) {
+
+        }
+        if (selectedFirst == null) {
+
+        }
+        else if(selectedFirst != null) {
+           // selectedSecond = selectedCards;
+            /*if(isValidLocation(selectedFirst.getInPile(),selectedSecond.getInPile())){
+                moveTo(selectedFirst.getInPile(),selectedSecond.getInPile());
+            }
+            moveTo(selectedFirst, selectedSecond);
+            selectedFirst=null;
+            selectedSecond=null;
+        }
+    }
+    */
 }
