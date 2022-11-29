@@ -27,6 +27,13 @@ public class Pile {
      * setting the last card to faceUp
      */
     public Pile(ArrayList<Card> cards){
+        this.pile = cards;
+    }
+
+    /**
+     * Creates a new pile, but does not makes the pile empty
+     */
+    public Pile(){
         this.pile = new ArrayList<Card>();
     }
 
@@ -37,7 +44,7 @@ public class Pile {
      */
     public ArrayList<Card> split(int index){
         ArrayList<Card> newPile = new ArrayList<Card>();
-        if(this.pile.get(index).getIsFaceUP()){
+        if(this.pile.get(index).getIsFaceUp()){
             for(int i = index; i < pile.size(); i++){
                 newPile.add(pile.get(i));
                 pile.remove(i);
@@ -86,10 +93,25 @@ public class Pile {
      */
     public void display(){
         for(Card c : this.pile){
-            if(c.getIsFaceUP() == false)
+            if(c.getIsFaceUp() == false)
                 System.out.println("UNKNOWN");
             else
                 System.out.println(c.getValue() + " of " + c.getSuit());
         }
     }
+
+    /**
+     * Returns the top card on the pile
+     * @return the top card on the pile
+     */
+    public Card getTopCard(){
+        return pile.get(pile.size()-1);
+    }
+
+    /**
+     *
+     * @return the bottom card on the pile
+     */
+    public Card getBottomCard(){return pile.get(0);}
+
 }

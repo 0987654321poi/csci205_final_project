@@ -29,6 +29,14 @@ public class Tableau {
     }
 
     /**
+     * Getter method for piles
+     * @return piles
+     */
+    public ArrayList<Pile> getPiles(){
+        return this.piles;
+    }
+
+    /**
      * Creates the piles that make up the tableau
      */
     public void createPiles(int numPiles) {
@@ -43,6 +51,10 @@ public class Tableau {
      */
     public void fillPile(int index, ArrayList<Card> cards){
         piles.get(index).addCards(cards);
+    }
+
+    public Card getTopCardFromPile(int index){
+        return piles.get(index).getTopCard();
     }
 }
 
