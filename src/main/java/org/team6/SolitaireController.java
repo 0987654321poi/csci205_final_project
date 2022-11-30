@@ -169,8 +169,6 @@ public class SolitaireController {
                     case 7:
                         VBoxPile7.getChildren().add(imView);
                         break;
-
-
                 }
             }
         }
@@ -182,9 +180,7 @@ public class SolitaireController {
 
     public void setModel(SolitaireModel model){
         this.theModel = model;
-
         initEventHandlers();
-
     }
 
 }

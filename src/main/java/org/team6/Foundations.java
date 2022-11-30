@@ -36,7 +36,7 @@ public class Foundations {
      *
      * @param card to be added to the foundation
      */
-    public void addCard(Card card, suit suit) {
+    public void addCard(Card card, Suit suit) {
         if (suit.equals(suit.HEART)) {
             this.hearts.add(card);
         } else if (suit.equals(suit.DIAMOND)) {
@@ -70,21 +70,21 @@ public class Foundations {
      * @param type, the suit of the foundation you want to pull from
      * @return the card at the top of that foundation
      */
-    public Card getCard(suit type){
+    public Card getCard(Suit type){
         Card out = null;
-        if(type.equals(suit.HEART)){
+        if(type.equals(Suit.HEART)){
             if(this.hearts.size() !=0) {
                 out = getTopHeart();
                 this.hearts.remove(this.hearts.size() - 1);
             }
         }
-        else if(type.equals(suit.DIAMOND)){
+        else if(type.equals(Suit.DIAMOND)){
             if(this.diamonds.size() != 0) {
                 out = getTopDiamond();
                 this.diamonds.remove(this.diamonds.size() - 1);
             }
         }
-        else if(type.equals(suit.SPADE)){
+        else if(type.equals(Suit.SPADE)){
             if(this.spades.size() !=0) {
                 out = getTopSpade();
                 this.spades.remove(this.spades.size() - 1);
@@ -104,17 +104,17 @@ public class Foundations {
      * @param Suit the suit of the card
      * @return a card object
      */
-    public Card getTopCard(suit Suit){
-        if (Suit.equals(org.team6.suit.HEART)) {
+    public Card getTopCard(Suit Suit){
+        if (Suit.equals(org.team6.Suit.HEART)) {
             return hearts.get(hearts.size()-1);
         }
-        else if (Suit.equals(org.team6.suit.DIAMOND)) {
+        else if (Suit.equals(org.team6.Suit.DIAMOND)) {
             return diamonds.get(diamonds.size()-1);
         }
-        else if (Suit.equals(org.team6.suit.SPADE)) {
+        else if (Suit.equals(org.team6.Suit.SPADE)) {
             return spades.get(spades.size()-1);
         }
-        else if (Suit.equals(org.team6.suit.CLUB)) {
+        else if (Suit.equals(org.team6.Suit.CLUB)) {
             return clubs.get(clubs.size()-1);
         }
         return null;
