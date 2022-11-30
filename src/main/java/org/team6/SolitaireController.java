@@ -117,7 +117,7 @@ public class SolitaireController {
         StockView.setImage(theGame.getTheStock().getTopCard().getAssociatedImage());
 
         StockView.setFitHeight(60);
-        StockView.setFitWidth(50);
+        StockView.setFitWidth(35);
 
         StockView.preserveRatioProperty();
 
@@ -129,7 +129,7 @@ public class SolitaireController {
             TalonView.setImage(theGame.getTheTalon().getTopCard().getAssociatedImage());
 
             TalonView.setFitHeight(60);
-            TalonView.setFitWidth(50);
+            TalonView.setFitWidth(35);
 
             TalonView.preserveRatioProperty();
 
@@ -140,41 +140,58 @@ public class SolitaireController {
         for (int i = 0; i < theGame.getTheTab().getPiles().size(); i++){
             for(int j = 0; j < theGame.getTheTab().getPiles().get(i).getPile().size(); j++){
                 ImageView imView = new ImageView();
-                imView.setImage(theGame.getTheTab().getPiles().get(i).getPile().get(j).getAssociatedImage());
+                Card card = theGame.getTheTab().getPiles().get(i).getPile().get(j);
+                imView.setImage(card.getAssociatedImage());
 
                 imView.setFitHeight(60);
-                imView.setFitWidth(50);
+                imView.setFitWidth(35);
 
                 imView.preserveRatioProperty();
-
+                VBox imViewContainer = new VBox();
                 switch(i){
                     case 1:
                         VBoxPile1.getChildren().add(imView);
+                        imViewContainer = VBoxPile1;
                         break;
                     case 2:
                         VBoxPile2.getChildren().add(imView);
+                        imViewContainer = VBoxPile2;
                         break;
                     case 3:
                         VBoxPile3.getChildren().add(imView);
+                        imViewContainer = VBoxPile3;
                         break;
                     case 4:
                         VBoxPile4.getChildren().add(imView);
+                        imViewContainer = VBoxPile4;
                         break;
                     case 5:
                         VBoxPile5.getChildren().add(imView);
+                        imViewContainer = VBoxPile5;
                         break;
                     case 6:
                         VBoxPile6.getChildren().add(imView);
+                        imViewContainer = VBoxPile6;
                         break;
                     case 7:
                         VBoxPile7.getChildren().add(imView);
+                        imViewContainer = VBoxPile7;
                         break;
                 }
+                VBox finalImViewContainer = imViewContainer;
+
+                imView.setOnMouseClicked(event -> {
+                    finalImViewContainer.getChildren().remove(imView);
+                    card.flip();
+                    imView.setImage(card.getAssociatedImage());
+                    finalImViewContainer.getChildren().add(imView);
+                });
             }
         }
     }
 
     private void initEventHandlers(){
+
 
     }
 
