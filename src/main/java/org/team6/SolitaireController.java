@@ -105,7 +105,6 @@ public class SolitaireController {
         assert btnUndo != null : "fx:id=\"btnUndo\" was not injected: check your FXML file 'solitaire.fxml'.";
         assert lblMoves != null : "fx:id=\"lblMoves\" was not injected: check your FXML file 'solitaire.fxml'.";
         assert lblTime != null : "fx:id=\"lblTime\" was not injected: check your FXML file 'solitaire.fxml'.";
-
     }
 
     /**
@@ -114,17 +113,39 @@ public class SolitaireController {
      */
     public void addCards() {
         Game theGame = theModel.getTheGame();
+        ImageView StockView = new ImageView();
+        StockView.setImage(theGame.getTheStock().getTopCard().getAssociatedImage());
+
+        StockView.setFitHeight(60);
+        StockView.setFitWidth(50);
+
+        StockView.preserveRatioProperty();
+
+        VBoxStockTalon.getChildren().add(StockView);
+
+
+        if(theGame.getTheTalon().getTopCard() != null) {
+            ImageView TalonView = new ImageView();
+            TalonView.setImage(theGame.getTheTalon().getTopCard().getAssociatedImage());
+
+            TalonView.setFitHeight(60);
+            TalonView.setFitWidth(50);
+
+            TalonView.preserveRatioProperty();
+
+            VBoxStockTalon.getChildren().add(TalonView);
+        }
+
+
         for (int i = 0; i < theGame.getTheTab().getPiles().size(); i++){
             for(int j = 0; j < theGame.getTheTab().getPiles().get(i).getPile().size(); j++){
                 ImageView imView = new ImageView();
                 imView.setImage(theGame.getTheTab().getPiles().get(i).getPile().get(j).getAssociatedImage());
 
-                imView.setFitHeight(50);
+                imView.setFitHeight(60);
                 imView.setFitWidth(50);
 
-                imView.setX(60 + 60 * i );
-                imView.setY(10 + 50 * j );
-
+                imView.preserveRatioProperty();
 
                 switch(i){
                     case 1:
