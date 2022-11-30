@@ -78,9 +78,14 @@ public class SolitaireModel {
      * @param selectedCard
      */
     public static void flipCard(Card selectedCard) {
-        if(selectedCard.getIsFaceUp() == false) {
-            selectedCard.flip();
-        }
+        selectedCard.flip();
+    }
+
+    /**
+     * @return the Game object
+     */
+    public Game getTheGame(){
+        return this.theGame;
     }
 
     /**
@@ -99,32 +104,5 @@ public class SolitaireModel {
         return false;
     }
 
-    /**
-     * 'selects' a card, currently unsure how this will function later
-     */
-    public static void select(Card selectedCard) {
-        //Create a Pile of Cards from the selected Card by splitting its pile location downward
 
-        Pile pileOfSelectedCard = selectedCard.getInPile(); //a fast reference to the Cards OG Pile Location
-
-        //gather the cards beneath the selected card in an arraylist
-        ArrayList<Card> selectedCards = pileOfSelectedCard.split(pileOfSelectedCard.getPile().indexOf(selectedCard));
-
-        
-        for (Card card : selectedCards) {
-
-        }
-        if (selectedFirst == null) {
-
-        }
-        else if(selectedFirst != null) {
-           // selectedSecond = selectedCards;
-            /*if(isValidLocation(selectedFirst.getInPile(),selectedSecond.getInPile())){
-                moveTo(selectedFirst.getInPile(),selectedSecond.getInPile());
-            }*/
-            moveTo(selectedFirst, selectedSecond);
-            selectedFirst=null;
-            selectedSecond=null;
-        }
-    }
 }

@@ -129,6 +129,38 @@ public class Game {
     }
 
     /**
+     * Simple getter method for the Stock
+     * @return theStock
+     */
+    public Stock getTheStock() {
+        return theStock;
+    }
+
+    /**
+     * Simple getter method for the Foundations
+     * @return theFoundations
+     */
+    public Foundations getTheFoundations() {
+        return theFoundations;
+    }
+
+    /**
+     * Simple getter method for the Talon
+     * @return theTalon
+     */
+    public Talon getTheTalon() {
+        return theTalon;
+    }
+
+    /**
+     * Simple getter method for the Tableau
+     * @return theTab
+     */
+    public Tableau getTheTab() {
+        return theTab;
+    }
+
+    /**
      * When the Stock is empty, we should have the ability to fill it with all of the cards from the
      * talon
      */

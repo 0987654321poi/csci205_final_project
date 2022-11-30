@@ -16,6 +16,8 @@
  * *****************************************/
 package org.team6;
 
+import javafx.scene.image.Image;
+
 /**
  * Class representing a single card that can be used in any standard card game
  */
@@ -29,11 +31,8 @@ public class Card {
     /** Boolean representing whether the card is face up or face down */
     private boolean isFaceUp;
 
-    /** Holds a reference to which pile the Card is in. **/
-    private Pile inPile;
-
-    /** Boolean representing if the card is in a 'selected' state **/
-    private boolean isSelected;
+    private Image associatedImage;
+    private Image cardBack;
 
     /**
      * Creates a card given information about the suit and value
@@ -48,8 +47,20 @@ public class Card {
         else
             this.color = "red";
         this.isFaceUp = false;
-        this.inPile = null;
-        this.isSelected = false;
+        associatedImage = new Image(getClass().getResourceAsStream("/" + getValue() + "of" + getSuitAsString() +".png"));
+        cardBack = new Image(getClass().getResourceAsStream("/CardBack.png"));
+    }
+
+    /**
+     * Returns the image file representing the Card if it is face up or the back of the card
+     * if it is face down
+     * @return associatedImage or CardBack
+     */
+    public Image getAssociatedImage(){
+        if(isFaceUp){
+            return this.associatedImage;
+        }
+        return this.cardBack;
     }
 
     /**
@@ -111,9 +122,22 @@ public class Card {
         return this.suit;
     }
 
-    /** getter method for inPile **/
-    public Pile getInPile() {
-        return this.inPile;
+    /**
+     * returns The suit of the card as a String
+     * @return A String representing the suit of the card
+     */
+    public String getSuitAsString(){
+        switch(suit){
+            case CLUB:
+                return "Clubs";
+            case HEART:
+                return "Hearts";
+            case DIAMOND:
+                return "Diamonds";
+            case SPADE:
+                return "Spades";
+        }
+        return "";
     }
 }
 

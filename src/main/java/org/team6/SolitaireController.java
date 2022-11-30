@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -106,6 +107,54 @@ public class SolitaireController {
         assert lblTime != null : "fx:id=\"lblTime\" was not injected: check your FXML file 'solitaire.fxml'.";
 
     }
+
+    /**
+     * Adds the cards associated image files from the card class into their associated containers in
+     * the view
+     */
+    public void addCards() {
+        Game theGame = theModel.getTheGame();
+        for (int i = 0; i < theGame.getTheTab().getPiles().size(); i++){
+            for(int j = 0; j < theGame.getTheTab().getPiles().get(i).getPile().size(); j++){
+                ImageView imView = new ImageView();
+                imView.setImage(theGame.getTheTab().getPiles().get(i).getPile().get(j).getAssociatedImage());
+
+                imView.setFitHeight(50);
+                imView.setFitWidth(50);
+
+                imView.setX(60 + 60 * i );
+                imView.setY(10 + 50 * j );
+
+
+                switch(i){
+                    case 1:
+                        VBoxPile1.getChildren().add(imView);
+                        break;
+                    case 2:
+                        VBoxPile2.getChildren().add(imView);
+                        break;
+                    case 3:
+                        VBoxPile3.getChildren().add(imView);
+                        break;
+                    case 4:
+                        VBoxPile4.getChildren().add(imView);
+                        break;
+                    case 5:
+                        VBoxPile5.getChildren().add(imView);
+                        break;
+                    case 6:
+                        VBoxPile6.getChildren().add(imView);
+                        break;
+                    case 7:
+                        VBoxPile7.getChildren().add(imView);
+                        break;
+
+
+                }
+            }
+        }
+    }
+
     private void initEventHandlers(){
 
     }
