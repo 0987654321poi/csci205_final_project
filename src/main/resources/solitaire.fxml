@@ -68,7 +68,10 @@
          <center>
             <HBox fx:id="HBoxTableau" prefHeight="300.0" prefWidth="430.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox fx:id="VBoxPile1" prefHeight="300.0" prefWidth="61.0" />
+                  <VBox fx:id="VBoxPile1" prefHeight="300.0" prefWidth="61.0">
+                     <HBox.margin>
+                        <Insets left="45.0" />
+                     </HBox.margin></VBox>
                   <VBox fx:id="VBoxPile2" prefHeight="300.0" prefWidth="61.0" />
                   <VBox fx:id="VBoxPile3" prefHeight="300.0" prefWidth="61.0" />
                   <VBox fx:id="VBoxPile4" prefHeight="300.0" prefWidth="61.0" />
