@@ -334,8 +334,12 @@ public class SolitaireController {
         }));
         //The stock
         VBoxStockTalon.getChildren().get(0).setOnMouseClicked(event -> {
-            theGame.draw();
-            clear();
+            if(!theGame.getSecondClick()) {
+                theGame.draw();
+                clear();
+            }
+            else
+                theGame.setSecondClickFalse();
         });
         //The talon
         if(VBoxStockTalon.getChildren().size() > 1) {
@@ -365,56 +369,42 @@ public class SolitaireController {
                 theGame.addToPile(0);
                 clear();
             }
-            else
-                theGame.setSecondClickFalse();
         });
         VBoxPile2.setOnMouseClicked(event -> {
             if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
                 theGame.addToPile(1);
                 clear();
             }
-            else
-                theGame.setSecondClickFalse();
         });
         VBoxPile3.setOnMouseClicked(event -> {
             if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
                 theGame.addToPile(2);
                 clear();
             }
-            else
-                theGame.setSecondClickFalse();
         });
         VBoxPile4.setOnMouseClicked(event -> {
             if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
                 theGame.addToPile(3);
                 clear();
             }
-            else
-                theGame.setSecondClickFalse();
         });
         VBoxPile5.setOnMouseClicked(event -> {
             if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
                 theGame.addToPile(4);
                 clear();
             }
-            else
-                theGame.setSecondClickFalse();
         });
         VBoxPile6.setOnMouseClicked(event -> {
             if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
                 theGame.addToPile(5);
                 clear();
             }
-            else
-                theGame.setSecondClickFalse();
         });
         VBoxPile6.setOnMouseClicked(event -> {
             if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
                 theGame.addToPile(6);
                 clear();
             }
-            else
-                theGame.setSecondClickFalse();
         });
     }
 

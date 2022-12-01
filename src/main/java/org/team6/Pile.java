@@ -47,9 +47,7 @@ public class Pile {
         for(int i = index; i < pile.size(); i++){
                 newPile.add(pile.get(i));
         }
-        if (pile.size() > index) {
-            pile.subList(index, pile.size()).clear();
-        }
+        pile.subList(index,pile.size()).clear();
         return newPile;
     }
 
