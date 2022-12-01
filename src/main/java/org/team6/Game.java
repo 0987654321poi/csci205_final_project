@@ -116,7 +116,7 @@ public class Game {
      */
     public void onMove(){
         for(Pile p : this.theTab.getPiles()){
-            if(!p.getTopCard().getIsFaceUp())
+            if(p.getTopCard()!= null && !p.getTopCard().getIsFaceUp())
                 p.getTopCard().flip();
         }
     }
@@ -173,9 +173,11 @@ public class Game {
      * Adds cards from the stock to the talon
      */
     public void draw(){
-        Card c = theStock.drawCard();
-        c.flip();
-        theTalon.addCard(c);
+        if(!theStock.isEmpty()) {
+            Card c = theStock.drawCard();
+            c.flip();
+            theTalon.addCard(c);
+        }
     }
 
     /**
@@ -231,11 +233,13 @@ public class Game {
      * Moves the contents of tempPile to Foundations and returns true upon success or false upon failure
      */
     public boolean addToFoundations() {
+        System.out.println("Attempt to add to Foundation");
         if(tempPile.size() == 1 && theFoundations.getTopCard(tempPile.get(0).getSuit()) == null &&
         tempPile.get(0).getIntValue() == 1){
             theFoundations.addCard(tempPile.get(0), tempPile.get(0).getSuit());
             setSecondClickFalse();
             onMove();
+            System.out.println("Success");
             return true;
         }
         else if (tempPile.size() == 1 && tempPile.get(0).getIntValue() == theFoundations.getTopCard(tempPile.get(0).getSuit()).getIntValue() + 1){
@@ -247,6 +251,7 @@ public class Game {
         else {
             setSecondClickFalse();
             reset();
+            System.out.println("Failure");
             return false;
         }
     }

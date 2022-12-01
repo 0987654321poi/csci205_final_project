@@ -25,10 +25,17 @@ public class Foundations {
     /**
      * Array list holding all of the cards that have been added to the foundation of each suit
      */
-    private ArrayList<Card> hearts = new ArrayList<Card>();
-    private ArrayList<Card> diamonds= new ArrayList<Card>();
-    private ArrayList<Card> spades= new ArrayList<Card>();
-    private ArrayList<Card> clubs= new ArrayList<Card>();
+    private ArrayList<Card> hearts;
+    private ArrayList<Card> diamonds;
+    private ArrayList<Card> spades;
+    private ArrayList<Card> clubs;
+
+    public Foundations(){
+        clubs = new ArrayList<Card>();
+        diamonds = new ArrayList<Card>();
+        hearts = new ArrayList<Card>();
+        spades = new ArrayList<Card>();
+    }
 
     /**
      * Method for adding a card to the proper foundation
@@ -127,19 +134,19 @@ public class Foundations {
     }
 
     public Card getTopDiamond() {
-        if(hearts.size() > 0)
+        if(diamonds.size() > 0)
             return diamonds.get(diamonds.size()-1);
         return null;
     }
 
     public Card getTopSpade() {
-        if(hearts.size() > 0)
+        if(spades.size() > 0)
             return spades.get(spades.size()-1);
         return null;
     }
 
     public Card getTopClub() {
-        if(hearts.size() > 0)
+        if(clubs.size() > 0)
             return clubs.get(clubs.size()-1);
         return null;
     }

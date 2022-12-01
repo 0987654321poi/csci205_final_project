@@ -103,13 +103,19 @@ public class Pile {
      * @return the top card on the pile
      */
     public Card getTopCard(){
-        return pile.get(pile.size()-1);
+        if(pile.size() > 0)
+            return pile.get(pile.size()-1);
+        return null;
     }
 
     /**
      *
      * @return the bottom card on the pile
      */
-    public Card getBottomCard(){return pile.get(0);}
+    public Card getBottomCard(){
+        if(pile.size() > 0)
+            return pile.get(0);
+        return null;
+    }
 
 }

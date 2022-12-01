@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -133,18 +134,26 @@ public class SolitaireController {
                 case 0:
                     if(theGame.getTheFoundations().getTopHeart()!= null)
                         imView.setImage(theGame.getTheFoundations().getTopHeart().getAssociatedImage());
+                    else
+                        imView.setImage(new Image(getClass().getResourceAsStream("/Empty.png")));
                     break;
                 case 1:
                     if(theGame.getTheFoundations().getTopSpade()!= null)
                         imView.setImage(theGame.getTheFoundations().getTopSpade().getAssociatedImage());
+                    else
+                        imView.setImage(new Image(getClass().getResourceAsStream("/Empty.png")));
                     break;
                 case 2:
                     if(theGame.getTheFoundations().getTopDiamond()!= null)
                         imView.setImage(theGame.getTheFoundations().getTopDiamond().getAssociatedImage());
+                    else
+                        imView.setImage(new Image(getClass().getResourceAsStream("/Empty.png")));
                     break;
                 case 3:
                     if(theGame.getTheFoundations().getTopClub()!= null)
                         imView.setImage(theGame.getTheFoundations().getTopClub().getAssociatedImage());
+                    else
+                        imView.setImage(new Image(getClass().getResourceAsStream("/Empty.png")));
                     break;
             }
             imView.setFitHeight(50);
@@ -246,6 +255,7 @@ public class SolitaireController {
                             theGame.addToPile(0);
                             clear();
                         }
+                        theGame.setSecondClickFalse();
                     }
                 }));
         VBoxPile2.getChildren().forEach(node -> node.setOnMouseClicked(event ->
@@ -260,6 +270,7 @@ public class SolitaireController {
                     theGame.addToPile(1);
                     clear();
                 }
+                theGame.setSecondClickFalse();
             }
         }));
         VBoxPile3.getChildren().forEach(node -> node.setOnMouseClicked(event ->
@@ -274,6 +285,7 @@ public class SolitaireController {
                     theGame.addToPile(2);
                     clear();
                 }
+                theGame.setSecondClickFalse();
             }
         }));
         VBoxPile4.getChildren().forEach(node -> node.setOnMouseClicked(event ->
@@ -288,6 +300,7 @@ public class SolitaireController {
                     theGame.addToPile(3);
                     clear();
                 }
+                theGame.setSecondClickFalse();
             }
         }));
         VBoxPile5.getChildren().forEach(node -> node.setOnMouseClicked(event ->
@@ -302,6 +315,7 @@ public class SolitaireController {
                     theGame.addToPile(4);
                     clear();
                 }
+                theGame.setSecondClickFalse();
             }
         }));
         VBoxPile6.getChildren().forEach(node -> node.setOnMouseClicked(event ->
@@ -316,6 +330,7 @@ public class SolitaireController {
                     theGame.addToPile(5);
                     clear();
                 }
+                theGame.setSecondClickFalse();
             }
         }));
         VBoxPile7.getChildren().forEach(node -> node.setOnMouseClicked(event ->
@@ -330,6 +345,7 @@ public class SolitaireController {
                     theGame.addToPile(6);
                     clear();
                 }
+                theGame.setSecondClickFalse();
             }
         }));
         //The stock
@@ -338,8 +354,11 @@ public class SolitaireController {
                 theGame.draw();
                 clear();
             }
-            else
+            else {
+                theGame.reset();
+                clear();
                 theGame.setSecondClickFalse();
+            }
         });
         //The talon
         if(VBoxStockTalon.getChildren().size() > 1) {
@@ -353,16 +372,17 @@ public class SolitaireController {
                     theGame.setTempPile(temp);
                     theGame.setLastMovedFrom(8);
                 }
+                else {
+                    theGame.reset();
+                    clear();
+                    theGame.setSecondClickFalse();
+                }
             });
         }
-        VBoxFoundations.setOnMouseClicked(event -> {
-            if(theGame.getSecondClick()) {
-                theGame.addToFoundations();
-                clear();
-            }
-            else
-                theGame.setSecondClickFalse();
-        });
+        VBoxFoundations.getChildren().forEach(child -> child.setOnMouseClicked(event -> {
+            theGame.addToFoundations();
+            clear();
+        }));
         //Making it so that you can click on an empty Vbox to add a King to the pile
         VBoxPile1.setOnMouseClicked(event -> {
             if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
