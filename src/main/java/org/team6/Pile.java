@@ -44,11 +44,11 @@ public class Pile {
      */
     public ArrayList<Card> split(int index){
         ArrayList<Card> newPile = new ArrayList<Card>();
-        if(this.pile.get(index).getIsFaceUp()){
-            for(int i = index; i < pile.size(); i++){
+        for(int i = index; i < pile.size(); i++){
                 newPile.add(pile.get(i));
-                pile.remove(i);
-            }
+        }
+        if (pile.size() > index) {
+            pile.subList(index, pile.size()).clear();
         }
         return newPile;
     }

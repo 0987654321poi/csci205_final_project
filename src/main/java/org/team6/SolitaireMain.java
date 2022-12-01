@@ -30,7 +30,6 @@ public class SolitaireMain extends Application {
         Parent root = loader.load();
         this.theController = loader.getController();
         this.theController.setModel(theModel);
-        this.theController.addCards();
 
         // Set up our stage
         primaryStage.setTitle("Solitaire");
