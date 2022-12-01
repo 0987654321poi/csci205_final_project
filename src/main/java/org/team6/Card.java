@@ -16,6 +16,7 @@
  * *****************************************/
 package org.team6;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
 
 /**
@@ -33,6 +34,7 @@ public class Card {
 
     private Image associatedImage;
     private Image cardBack;
+
 
     /**
      * Creates a card given information about the suit and value
