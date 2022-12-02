@@ -30,6 +30,10 @@ public class Foundations {
     private ArrayList<Card> spades;
     private ArrayList<Card> clubs;
 
+    /**
+     * Foundations Constructor
+     * creates new ArrayLists containing Cards for each suit (clubs, diamonds, hearts, spades)
+     */
     public Foundations(){
         clubs = new ArrayList<Card>();
         diamonds = new ArrayList<Card>();
