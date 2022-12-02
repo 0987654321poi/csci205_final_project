@@ -22,12 +22,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
@@ -249,9 +252,16 @@ public class SolitaireController {
                         theGame.setTempPile(theGame.getTheTab().getPiles().get(0).split(VBoxPile1.getChildren().indexOf(node)));
                         theGame.setSecondClickTrue();
                         theGame.setLastMovedFrom(0);
+                        //Make the Card Glow
+                        int index = VBoxPile1.getChildren().indexOf(node);
+                        cardGlow(VBoxPile1.getChildren().get(index));
+
                     }
                     else {
                         if(theGame.getLastMovedFrom() != 0) {
+                            // Take Away Card GLow
+                            int index = VBoxPile1.getChildren().indexOf(node);
+                            removeGlow(VBoxPile1.getChildren().get(index));
                             theGame.addToPile(0);
                             clear();
                         }
@@ -432,6 +442,14 @@ public class SolitaireController {
         this.theModel = model;
         addCards();
         initEventHandlers(theModel.getTheGame());
+    }
+
+    public void cardGlow(Node image) {
+        image.setEffect(new DropShadow(20, Color.GOLD));
+
+    }
+    public void removeGlow(Node image) {
+        image.setEffect(null);
     }
 
 }
