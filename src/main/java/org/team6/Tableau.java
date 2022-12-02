@@ -22,7 +22,8 @@ public class Tableau {
     private ArrayList<Pile> piles;
 
     /**
-     * Constructs a Tableau
+     * constructor for the Tableau class
+     * creates an ArrayList holding Pile classes
      */
     public Tableau(){
         this.piles = new ArrayList<Pile>();
@@ -37,7 +38,7 @@ public class Tableau {
     }
 
     /**
-     * Creates the piles that make up the tableau
+     * instantiates an 'numPiles' amount of Pile Classes to append to the Tableau
      */
     public void createPiles(int numPiles) {
         for (int i = 0; i < numPiles; i++) {
@@ -46,8 +47,8 @@ public class Tableau {
     }
 
     /**
-     * Fills a piles in the tableau given an index
-     * @param index the position of the pile within the tableau
+     * fills the referenced pile with the given array list of Cards
+     * @param index the indexed position of the pile within the Tableau
      */
     public void fillPile(int index, ArrayList<Card> cards){
         piles.get(index).addCards(cards);
