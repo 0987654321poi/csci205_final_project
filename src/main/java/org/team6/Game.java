@@ -121,6 +121,19 @@ public class Game {
         }
     }
 
+    public void draw(){
+        if(!theStock.isEmpty()) {
+            Card c = theStock.drawCard();
+            c.flip();
+            theTalon.addCard(c);
+        }
+    }
+
+    //public void resetStock(){
+
+    //}
+
+
     /**
      * Moves the contents of tempPile to a new given index of pile
      * @param pilePos the index of a pile within the tableau
@@ -172,13 +185,6 @@ public class Game {
     /**
      * Adds cards from the stock to the talon
      */
-    public void draw(){
-        if(!theStock.isEmpty()) {
-            Card c = theStock.drawCard();
-            c.flip();
-            theTalon.addCard(c);
-        }
-    }
 
     /**
      * Simple getter method for the Stock

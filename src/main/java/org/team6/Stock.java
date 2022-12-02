@@ -40,8 +40,11 @@ public class Stock {
      * @return
      */
     public Card drawCard(){
-        Card out = this.cards.get(this.cards.size()-1);
-        this.cards.remove(this.cards.size()-1);
+        Card out = null;
+        if(!cards.isEmpty()) {
+            out = this.cards.get(this.cards.size() - 1);
+            this.cards.remove(this.cards.size() - 1);
+        }
         return out;
     }
 
@@ -66,7 +69,9 @@ public class Stock {
      * @return the top card in the stock
      */
     public Card getTopCard(){
-        return this.cards.get(this.cards.size()-1);
+        if(this.cards.size() > 0)
+            return this.cards.get(this.cards.size()-1);
+        return null;
     }
 
 }

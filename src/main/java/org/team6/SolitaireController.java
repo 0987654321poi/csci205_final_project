@@ -218,8 +218,9 @@ public class SolitaireController {
 
     private void addStock(Game theGame) {
         ImageView StockView = new ImageView();
-        StockView.setImage(theGame.getTheStock().getTopCard().getAssociatedImage());
-
+        if(theGame.getTheStock().getTopCard() != null) {
+            StockView.setImage(theGame.getTheStock().getTopCard().getAssociatedImage());
+        }
         StockView.setFitHeight(50);
         StockView.setFitWidth(40);
 
@@ -244,7 +245,7 @@ public class SolitaireController {
 
     private void initEventHandlers(Game theGame){
         VBoxPile1.getChildren().forEach(node -> node.setOnMouseClicked(event ->
-                {
+        {
                     if(!theGame.getSecondClick()) {
                         theGame.setTempPile(theGame.getTheTab().getPiles().get(0).split(VBoxPile1.getChildren().indexOf(node)));
                         theGame.setSecondClickTrue();
@@ -255,6 +256,8 @@ public class SolitaireController {
                             theGame.addToPile(0);
                             clear();
                         }
+                        else
+                            theGame.reset();
                         theGame.setSecondClickFalse();
                     }
                 }));
@@ -270,6 +273,8 @@ public class SolitaireController {
                     theGame.addToPile(1);
                     clear();
                 }
+                else
+                    theGame.reset();
                 theGame.setSecondClickFalse();
             }
         }));
@@ -285,6 +290,8 @@ public class SolitaireController {
                     theGame.addToPile(2);
                     clear();
                 }
+                else
+                    theGame.reset();
                 theGame.setSecondClickFalse();
             }
         }));
@@ -300,6 +307,8 @@ public class SolitaireController {
                     theGame.addToPile(3);
                     clear();
                 }
+                else
+                    theGame.reset();
                 theGame.setSecondClickFalse();
             }
         }));
@@ -315,6 +324,8 @@ public class SolitaireController {
                     theGame.addToPile(4);
                     clear();
                 }
+                else
+                    theGame.reset();
                 theGame.setSecondClickFalse();
             }
         }));
@@ -330,6 +341,8 @@ public class SolitaireController {
                     theGame.addToPile(5);
                     clear();
                 }
+                else
+                    theGame.reset();
                 theGame.setSecondClickFalse();
             }
         }));
@@ -345,6 +358,8 @@ public class SolitaireController {
                     theGame.addToPile(6);
                     clear();
                 }
+                else
+                    theGame.reset();
                 theGame.setSecondClickFalse();
             }
         }));
