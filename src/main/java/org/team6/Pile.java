@@ -19,6 +19,10 @@ package org.team6;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ * A class to encapsulate the idea of a pile of cards. Will be used to represent each pile in the tableau
+ * as well as piles of cards being moved around from one location in the tableau to another.
+ */
 public class Pile {
     private ArrayList<Card> pile;
 

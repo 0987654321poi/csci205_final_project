@@ -45,7 +45,7 @@ public class Talon {
     }
 
     /**
-     * Returns the top card on the talon
+     * Returns the top card on the talon represented by the card at the last index in the cards list
      * @return the card at the top of the talon or null if the talon is empty
      */
     public Card getTopCard(){
