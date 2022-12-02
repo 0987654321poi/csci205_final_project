@@ -390,8 +390,12 @@ public class SolitaireController {
             });
         }
         VBoxFoundations.getChildren().forEach(child -> child.setOnMouseClicked(event -> {
-            theGame.addToFoundations();
-            clear();
+            if(theGame.getSecondClick()) {
+                theGame.addToFoundations();
+                clear();
+            }
+            else
+                theGame.setSecondClickFalse();
         }));
         //Making it so that you can click on an empty Vbox to add a King to the pile
         VBoxPile1.setOnMouseClicked(event -> {
