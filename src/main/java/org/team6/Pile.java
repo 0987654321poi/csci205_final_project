@@ -23,22 +23,23 @@ public class Pile {
     private ArrayList<Card> pile;
 
     /**
-     * When instantiating a pile for solitaire it will take in a list of cards and fill the pile,
-     * setting the last card to faceUp
+     * Constructs a new pile of cards, filing our pile field with an arraylist of cards representing the
+     * cards in the pile
      */
     public Pile(ArrayList<Card> cards){
         this.pile = cards;
     }
 
     /**
-     * Creates a new pile, but does not makes the pile empty
+     * Creates a new pile, but makes the pile empty
      */
     public Pile(){
         this.pile = new ArrayList<Card>();
     }
 
     /**
-     * Splits the pile, returning a new ArrayList
+     * Splits the pile at a given index, returning a new ArrayList representing the cards that are being removed
+     * from the original pile
      * @param index The index of the card being selected
      * @return An ArrayList of the card selected and any cards beneath it
      */
@@ -52,7 +53,7 @@ public class Pile {
     }
 
     /**
-     * Simple getter method for pile
+     * Simple getter method for pile, the ArrayList of cards representing the cards in our pile object
      * @return the pile of cards as an ArrayList, this should only be used for testing
      */
     public ArrayList<Card> getPile(){ return this.pile; }
@@ -60,7 +61,7 @@ public class Pile {
 
     /**
      * Adds new cards to the pile from an Arraylist of cards
-     * @param cards an ArrayList of cards
+     * @param cards the ArrayList of cards to be added
      */
     public void addCards(ArrayList<Card> cards){
         for (int i = 0; i < cards.size(); i++)
@@ -69,7 +70,7 @@ public class Pile {
     }
 
     /**
-     * Adds a card to the pile
+     * Adds a single card to the pile
      * @param card The card to be added
      */
     public void addCard(Card card){
@@ -77,29 +78,10 @@ public class Pile {
     }
 
 
-    /**
-     * locates a card in the Pile ArrayList
-     * @param card
-     * @return
-     */
-    public int indexOf(Card card) {
-        return 0;
-    }
 
     /**
-     * For testing only
-     */
-    public void display(){
-        for(Card c : this.pile){
-            if(c.getIsFaceUp() == false)
-                System.out.println("UNKNOWN");
-            else
-                System.out.println(c.getValue() + " of " + c.getSuit());
-        }
-    }
-
-    /**
-     * Returns the top card on the pile
+     * Returns the top card on the pile, which is represented by the card with the last index in the pile
+     * ArrayList
      * @return the top card on the pile
      */
     public Card getTopCard(){
@@ -109,7 +91,8 @@ public class Pile {
     }
 
     /**
-     *
+     * Returns the bottom card on the pile, which is represented by the card at the 0th index in the pile
+     * ArrayList
      * @return the bottom card on the pile
      */
     public Card getBottomCard(){
