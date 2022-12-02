@@ -33,7 +33,8 @@ public class SolitaireMain extends Application {
 
         // Set up our stage
         primaryStage.setTitle("Solitaire");
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(root, 600, 700);
+        primaryStage.setScene(scene);
         primaryStage.show();
 
     }
