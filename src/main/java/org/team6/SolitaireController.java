@@ -22,15 +22,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
@@ -168,40 +165,53 @@ public class SolitaireController {
     }
 
     private void addTableau(Game theGame) {
-        for (int i = 0; i < theGame.getTheTab().getPiles().size(); i++){
-            for(int j = 0; j < theGame.getTheTab().getPiles().get(i).getPile().size(); j++){
-                ImageView imView = new ImageView();
-                imView.setImage(theGame.getTheTab().getPiles().get(i).getPile().get(j).getAssociatedImage());
+        ImageView imageView = new ImageView();
+        for (int i = 0; i < theGame.getTheTab().getPiles().size(); i++)
+            addPile(theGame,i);
+    }
 
-                imView.setFitHeight(50);
-                imView.setFitWidth(40);
+    private void addPile(Game theGame, int pileIndex){
+        if(theGame.getTheTab().getPiles().get(pileIndex).getPile().size() == 0) {
+            ImageView imView = new ImageView();
+            imView.setImage(new Image(getClass().getResourceAsStream("/Empty.png")));
 
-                imView.preserveRatioProperty();
+            addImageToPile(pileIndex, imView);
+        }
+        for(int j = 0; j < theGame.getTheTab().getPiles().get(pileIndex).getPile().size(); j++) {
+            ImageView imView = new ImageView();
+            imView.setImage(theGame.getTheTab().getPiles().get(pileIndex).getPile().get(j).getAssociatedImage());
 
-                switch(i){
-                    case 0:
-                        VBoxPile1.getChildren().add(imView);
-                        break;
-                    case 1:
-                        VBoxPile2.getChildren().add(imView);
-                        break;
-                    case 2:
-                        VBoxPile3.getChildren().add(imView);
-                        break;
-                    case 3:
-                        VBoxPile4.getChildren().add(imView);
-                        break;
-                    case 4:
-                        VBoxPile5.getChildren().add(imView);
-                        break;
-                    case 5:
-                        VBoxPile6.getChildren().add(imView);
-                        break;
-                    case 6:
-                        VBoxPile7.getChildren().add(imView);
-                        break;
-                }
-            }
+            addImageToPile(pileIndex, imView);
+        }
+    }
+
+    private void addImageToPile(int pileIndex, ImageView imView) {
+        imView.setFitHeight(50);
+        imView.setFitWidth(40);
+
+        imView.preserveRatioProperty();
+        switch (pileIndex) {
+            case 0:
+                VBoxPile1.getChildren().add(imView);
+                break;
+            case 1:
+                VBoxPile2.getChildren().add(imView);
+                break;
+            case 2:
+                VBoxPile3.getChildren().add(imView);
+                break;
+            case 3:
+                VBoxPile4.getChildren().add(imView);
+                break;
+            case 4:
+                VBoxPile5.getChildren().add(imView);
+                break;
+            case 5:
+                VBoxPile6.getChildren().add(imView);
+                break;
+            case 6:
+                VBoxPile7.getChildren().add(imView);
+                break;
         }
     }
 
@@ -247,144 +257,26 @@ public class SolitaireController {
     }
 
     private void initEventHandlers(Game theGame){
-        VBoxPile1.getChildren().forEach(node -> node.setOnMouseClicked(event ->
-        {
-                    if(!theGame.getSecondClick()) {
-                        theGame.setTempPile(theGame.getTheTab().getPiles().get(0).split(VBoxPile1.getChildren().indexOf(node)));
-                        theGame.setSecondClickTrue();
-                        theGame.setLastMovedFrom(0);
-                        //Make the Card Glow
-                        int index = VBoxPile1.getChildren().indexOf(node);
-                        cardGlow(VBoxPile1.getChildren().get(index));
+        initPileLogic(VBoxPile1, theGame, 0);
+        initPileLogic(VBoxPile2, theGame, 1);
+        initPileLogic(VBoxPile3, theGame, 2);
+        initPileLogic(VBoxPile4, theGame, 3);
+        initPileLogic(VBoxPile5, theGame, 4);
+        initPileLogic(VBoxPile6, theGame, 5);
+        initPileLogic(VBoxPile7, theGame, 6);
+        initStockLogic(theGame);
+        initTalonLogic(theGame);
+        VBoxFoundations.getChildren().forEach(child -> child.setOnMouseClicked(event -> {
+            if(theGame.getSecondClick()) {
+                theGame.addToFoundations();
+                clear();
+            }
+            else
+                theGame.setSecondClickFalse();
+        }));
+    }
 
-                    }
-                    else {
-                        if(theGame.getLastMovedFrom() != 0) {
-                            // Take Away Card GLow
-                            int index = VBoxPile1.getChildren().indexOf(node);
-                            removeGlow(VBoxPile1.getChildren().get(index));
-                            theGame.addToPile(0);
-                            clear();
-                        }
-                        else
-                            theGame.reset();
-                        theGame.setSecondClickFalse();
-                    }
-                }));
-        VBoxPile2.getChildren().forEach(node -> node.setOnMouseClicked(event ->
-        {
-            if(!theGame.getSecondClick()) {
-                theGame.setTempPile(theGame.getTheTab().getPiles().get(1).split(VBoxPile2.getChildren().indexOf(node)));
-                theGame.setSecondClickTrue();
-                theGame.setLastMovedFrom(1);
-            }
-            else {
-                if(theGame.getLastMovedFrom() != 1) {
-                    theGame.addToPile(1);
-                    clear();
-                }
-                else
-                    theGame.reset();
-                theGame.setSecondClickFalse();
-            }
-        }));
-        VBoxPile3.getChildren().forEach(node -> node.setOnMouseClicked(event ->
-        {
-            if(!theGame.getSecondClick()) {
-                theGame.setTempPile(theGame.getTheTab().getPiles().get(2).split(VBoxPile3.getChildren().indexOf(node)));
-                theGame.setSecondClickTrue();
-                theGame.setLastMovedFrom(2);
-            }
-            else {
-                if(theGame.getLastMovedFrom() != 2) {
-                    theGame.addToPile(2);
-                    clear();
-                }
-                else
-                    theGame.reset();
-                theGame.setSecondClickFalse();
-            }
-        }));
-        VBoxPile4.getChildren().forEach(node -> node.setOnMouseClicked(event ->
-        {
-            if(!theGame.getSecondClick()) {
-                theGame.setTempPile(theGame.getTheTab().getPiles().get(3).split(VBoxPile4.getChildren().indexOf(node)));
-                theGame.setSecondClickTrue();
-                theGame.setLastMovedFrom(3);
-            }
-            else {
-                if(theGame.getLastMovedFrom() != 3) {
-                    theGame.addToPile(3);
-                    clear();
-                }
-                else
-                    theGame.reset();
-                theGame.setSecondClickFalse();
-            }
-        }));
-        VBoxPile5.getChildren().forEach(node -> node.setOnMouseClicked(event ->
-        {
-            if(!theGame.getSecondClick()) {
-                theGame.setTempPile(theGame.getTheTab().getPiles().get(4).split(VBoxPile5.getChildren().indexOf(node)));
-                theGame.setSecondClickTrue();
-                theGame.setLastMovedFrom(4);
-            }
-            else {
-                if(theGame.getLastMovedFrom() != 4) {
-                    theGame.addToPile(4);
-                    clear();
-                }
-                else
-                    theGame.reset();
-                theGame.setSecondClickFalse();
-            }
-        }));
-        VBoxPile6.getChildren().forEach(node -> node.setOnMouseClicked(event ->
-        {
-            if(!theGame.getSecondClick()) {
-                theGame.setTempPile(theGame.getTheTab().getPiles().get(5).split(VBoxPile6.getChildren().indexOf(node)));
-                theGame.setSecondClickTrue();
-                theGame.setLastMovedFrom(5);
-            }
-            else {
-                if(theGame.getLastMovedFrom() != 5) {
-                    theGame.addToPile(5);
-                    clear();
-                }
-                else
-                    theGame.reset();
-                theGame.setSecondClickFalse();
-            }
-        }));
-        VBoxPile7.getChildren().forEach(node -> node.setOnMouseClicked(event ->
-        {
-            if(!theGame.getSecondClick()) {
-                theGame.setTempPile(theGame.getTheTab().getPiles().get(6).split(VBoxPile7.getChildren().indexOf(node)));
-                theGame.setSecondClickTrue();
-                theGame.setLastMovedFrom(6);
-            }
-            else {
-                if(theGame.getLastMovedFrom() != 6) {
-                    theGame.addToPile(6);
-                    clear();
-                }
-                else
-                    theGame.reset();
-                theGame.setSecondClickFalse();
-            }
-        }));
-        //The stock
-        VBoxStockTalon.getChildren().get(0).setOnMouseClicked(event -> {
-            if(!theGame.getSecondClick()) {
-                theGame.draw();
-                clear();
-            }
-            else {
-                theGame.reset();
-                clear();
-                theGame.setSecondClickFalse();
-            }
-        });
+    private void initTalonLogic(Game theGame) {
         //The talon
         if(VBoxStockTalon.getChildren().size() > 1) {
             VBoxStockTalon.getChildren().get(1).setOnMouseClicked(event -> {
@@ -404,71 +296,49 @@ public class SolitaireController {
                 }
             });
         }
-        VBoxFoundations.getChildren().forEach(child -> child.setOnMouseClicked(event -> {
-            if(theGame.getSecondClick()) {
-                theGame.addToFoundations();
+    }
+
+    private void initStockLogic(Game theGame) {
+        //The stock
+        VBoxStockTalon.getChildren().get(0).setOnMouseClicked(event -> {
+            if(!theGame.getSecondClick()) {
+                theGame.draw();
                 clear();
             }
-            else
+            else {
+                theGame.reset();
+                clear();
                 theGame.setSecondClickFalse();
+            }
+        });
+    }
+
+    private void initPileLogic(VBox VBoxPile1, Game theGame, int index) {
+        VBoxPile1.getChildren().forEach(node -> node.setOnMouseClicked(event ->
+        {
+            if(!theGame.getSecondClick()) {
+                if(!theGame.getTheTab().getPiles().get(index).getPile().get(VBoxPile1.getChildren().indexOf(node)).getIsFaceUp() == false){
+                    theGame.setTempPile(theGame.getTheTab().getPiles().get(index).split(VBoxPile1.getChildren().indexOf(node)));
+                    theGame.setSecondClickTrue();
+                    theGame.setLastMovedFrom(index);
+                }
+            }
+            else {
+                if(theGame.getLastMovedFrom() != index) {
+                    theGame.addToPile(index);
+                    clear();
+                }
+                else
+                    theGame.reset();
+                theGame.setSecondClickFalse();
+            }
         }));
-        //Making it so that you can click on an empty Vbox to add a King to the pile
-        VBoxPile1.setOnMouseClicked(event -> {
-            if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
-                theGame.addToPile(0);
-                clear();
-            }
-        });
-        VBoxPile2.setOnMouseClicked(event -> {
-            if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
-                theGame.addToPile(1);
-                clear();
-            }
-        });
-        VBoxPile3.setOnMouseClicked(event -> {
-            if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
-                theGame.addToPile(2);
-                clear();
-            }
-        });
-        VBoxPile4.setOnMouseClicked(event -> {
-            if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
-                theGame.addToPile(3);
-                clear();
-            }
-        });
-        VBoxPile5.setOnMouseClicked(event -> {
-            if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
-                theGame.addToPile(4);
-                clear();
-            }
-        });
-        VBoxPile6.setOnMouseClicked(event -> {
-            if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
-                theGame.addToPile(5);
-                clear();
-            }
-        });
-        VBoxPile6.setOnMouseClicked(event -> {
-            if(VBoxPile1.getChildren().size() == 0 && theGame.getSecondClick()){
-                theGame.addToPile(6);
-                clear();
-            }
-        });
     }
 
     public void setModel(SolitaireModel model){
         this.theModel = model;
         addCards();
         initEventHandlers(theModel.getTheGame());
-    }
-
-    public void cardGlow(Node image) {
-        image.setEffect(new DropShadow(20, Color.GOLD));
-
-    }
-    public void removeGlow(Node image) {
-        image.setEffect(null);
     }
 
 }
