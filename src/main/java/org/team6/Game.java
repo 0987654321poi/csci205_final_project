@@ -111,7 +111,7 @@ public class Game {
     }
 
     /**
-     * After a card is moved from one pile to another, check the bottom card of all piles and
+     * After a card is moved from one pile to another, check the top card of all piles and
      * flip if it is not already face up
      */
     public void onMove(){
