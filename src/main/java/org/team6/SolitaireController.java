@@ -20,6 +20,8 @@ package org.team6;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -274,6 +276,7 @@ public class SolitaireController {
             else
                 theGame.setSecondClickFalse();
         }));
+
     }
 
     private void initTalonLogic(Game theGame) {
@@ -309,6 +312,21 @@ public class SolitaireController {
                 theGame.reset();
                 clear();
                 theGame.setSecondClickFalse();
+            }
+        });
+
+        btnUndo.setOnAction(event -> {
+            if(theGame.getTheStock().isEmpty()) {
+                ArrayList<Card> tempToBeMovedToStock = theGame.getTheTalon().getCards();
+                Collections.reverse(tempToBeMovedToStock);
+                for(Card card: tempToBeMovedToStock) {
+                    if(card != null) {
+                        card.flip();
+                    }
+                }
+                theGame.getTheTalon().emptyTalon();
+                theGame.getTheStock().resetStock(tempToBeMovedToStock);
+                addStock(theGame);
             }
         });
     }
