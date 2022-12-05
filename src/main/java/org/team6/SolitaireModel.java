@@ -4,14 +4,14 @@
  *
  * Name: Kevin Page
  * Section: 9:00
- * Date: 11/8/2022
- * Time: 10:14 AM
+ * Date: 11/18/2022
+ * Time: 9:03 AM
  *
  * Project: csci205_final_prject
  * Package: org.team6
- * Class: Pile
+ * Class: Game
  *
- * Description: Class representing the entire game of Solitaire
+ * Description: Class representing all the functions needed to play the game of Solitaire
  *
  * *****************************************/
 package org.team6;
@@ -19,126 +19,241 @@ package org.team6;
 import java.util.ArrayList;
 
 public class SolitaireModel {
-
     /**
-     * which card was selected first during a moveset
+     * The stock for our solitaire game
      */
-    private static Pile selectedFirst;
-
+    private Stock theStock;
 
     /**
-     * which card was selected second (last) during a moveset
+     * The talon for our solitaire game
      */
-    private static Pile selectedSecond;
-
-    /** the game instance being interacted with by the Model */
-    private static Game theGame;
+    private Talon theTalon;
 
     /**
-     * the constructor for the Solitaire Model
+     * The tableau for our solitaire game
+     */
+    private Tableau theTab;
+
+    /**
+     * A pile to hold cards that are in the process of being moved
+     */
+    private ArrayList<Card> tempPile = new ArrayList<Card>();
+
+    /**
+     * The foundations for our solitaire game
+     */
+    private Foundations theFoundations;
+
+    /**
+     * The deck for our solitaire game
+     */
+    private Deck theDeck;
+
+    private boolean secondClick = false;
+
+    /**
+     * The number of piles in the tableau
+     */
+    private final int NUM_PILES = 7;
+
+    /** Stores a record of which pile was last moved from, in order to return tempPile to
+     * its previous position upon failure to be moved to a new position
+     */
+    private int lastMovedFrom = -1;
+
+    /**
+     * Constructor for the game class, creates the stock, talon, tableau, etc. and fills them all
+     * with cards
      */
     public SolitaireModel() {
-        this.selectedFirst=null;
-        this.selectedSecond=null;
-        this.theGame = new Game();
-    }
-
-    /**
-     * determines based on the piles class instance if the new location is valid
-     * @param from the selected pile
-     * @param to the new location pile
-     * @return true if the move is valid
-     * @return false if invalid
-     */
-    private static boolean isValidLocation( Card from, Card to) {
-        return false; //TODO isValidLocation
-       // if (to.getIsIn() instanceof )
-    }
-
-    /**
-     * Attempts to move a selected pile to a new location, if valid
-     * @param from the selected pile
-     * @param to the new location pile
-     * @return true if the move is successful,
-     * @return false if unsuccessful
-     */
-    public static boolean moveTo( Pile from, Pile to) {
-        return false; //TODO MAKE moveTo
-    }
-
-    /**
-     * takes the selected card and flips it if the card is face down
-     * @param selectedCard
-     */
-    public static void flipCard(Card selectedCard) {
-        selectedCard.flip();
-    }
-
-    /**
-     * @return the Game object
-     */
-    public Game getTheGame(){
-        return this.theGame;
-    }
-
-    /**
-     * Searches a new placement for the selected card.
-     * The game attempts to do this automatically, only requiring the clicking of the card.
-     * @param selectedCard
-     * @return
-     */
-    public static boolean autoMoveCard(Card selectedCard) {
-        //temporary: is the card on top? continue if yes, return false if no
-        //TODO check for valid position to move
-        //Can it be placed in Foundations?
-        //TODO check for valid Foundation spots
-        //Can it be moved to somewhere else in the Tableau?
-        //TODO check for valid Tableau spots
-        //if neither is true, return false
-        return false;
-    }
-
-
-
-
-    //----------------------------------=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
-
-
-    /**
-     * undoes all actions made in the current instance, and reverts it to the previous instance.
-     */
-    public static void undo() {
-
-    }
-    /*
-    /**
-     * 'selects' a card, currently unsure how this will function later
-
-    public static void select(Card selectedCard) {
-        //Create a Pile of Cards from the selected Card by splitting its pile location downward
-
-        Object pileOfSelectedCard = selectedCard.getIsIn(); //a fast reference to the Cards OG Pile Location
-
-        //gather the cards beneath the selected card in an arraylist
-        ArrayList<Card> selectedCards = pileOfSelectedCard.split(pileOfSelectedCard.getPile().indexOf(selectedCard));
-
-        
-        for (Card card : selectedCards) {
-
-        }
-        if (selectedFirst == null) {
-
-        }
-        else if(selectedFirst != null) {
-           // selectedSecond = selectedCards;
-            /*if(isValidLocation(selectedFirst.getInPile(),selectedSecond.getInPile())){
-                moveTo(selectedFirst.getInPile(),selectedSecond.getInPile());
+        theDeck = new Deck();
+        theDeck.fillStandardDeck();
+        theDeck.shuffle();
+        theStock = new Stock(theDeck.getDeck());
+        theTab = new Tableau();
+        theTalon = new Talon();
+        theFoundations = new Foundations();
+        //Creates the 7 piles that form the stock in a game of Solitaire, fills them with 1, 2, 3,
+        //4, 5, 6, and 7 cards according to their position, flips the final card in the pile
+        theTab.createPiles(NUM_PILES);
+        for (int i = 0; i < NUM_PILES; i++) {
+            ArrayList<Card> temp = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                temp.add(theStock.drawCard());
             }
-            moveTo(selectedFirst, selectedSecond);
-            selectedFirst=null;
-            selectedSecond=null;
+            theTab.fillPile(i, temp);
+            theTab.getTopCardFromPile(i).flip();
         }
     }
-    */
+
+    public int getLastMovedFrom(){
+        return lastMovedFrom;
+    }
+
+    public void setLastMovedFrom(int PilePos){
+        lastMovedFrom = PilePos;
+    }
+
+    public void setSecondClickFalse(){
+        secondClick = false;
+    }
+    public void setSecondClickTrue(){
+        secondClick = true;
+    }
+
+    public Boolean getSecondClick(){
+        return this.secondClick;
+    }
+
+    /**
+     * After a card is moved from one pile to another, check the top card of all piles and
+     * flip if it is not already face up
+     */
+    public void onMove(){
+        for(Pile p : this.theTab.getPiles()){
+            if(p.getTopCard()!= null && !p.getTopCard().getIsFaceUp())
+                p.getTopCard().flip();
+        }
+    }
+
+    public void draw(){
+        if(!theStock.isEmpty()) {
+            Card c = theStock.drawCard();
+            c.flip();
+            theTalon.addCard(c);
+        }
+    }
+
+    //public void resetStock(){
+
+    //}
+
+
+    /**
+     * Moves the contents of tempPile to a new given index of pile
+     * @param pilePos the index of a pile within the tableau
+     */
+    public boolean addToPile(int pilePos){
+        if(tempPile.size() > 0) {
+            Card c = tempPile.get(0);
+            if(theTab.getPiles().get(pilePos).getPile().size() == 0 && tempPile.get(0).getIntValue() == 13 &&
+            c.getIsFaceUp()){
+                theTab.getPiles().get(pilePos).addCards(tempPile);
+                setSecondClickFalse();
+                onMove();
+                return true;
+            }
+            else if (c.getIntValue() == theTab.getPiles().get(pilePos).getTopCard().getIntValue() - 1 &&
+                    !c.getColor().equals(theTab.getPiles().get(pilePos).getTopCard().getColor()) &&
+                    c.getIsFaceUp()) {
+                theTab.getPiles().get(pilePos).addCards(tempPile);
+                setSecondClickFalse();
+                onMove();
+                return true;
+            }
+        }
+            setSecondClickFalse();
+            reset();
+            return false;
+    }
+
+    /** Adds the contents of tempPile back to its previous position as determined by
+     * the integer value lastMovedFrom
+      */
+    public void reset(){
+        //add functionality for moving cards back to the talon as well
+        if(lastMovedFrom < 7)
+            addToPileFree(lastMovedFrom);
+        else if(lastMovedFrom == 8){
+            theTalon.addCard(tempPile.get(0));
+        }
+    }
+
+
+    /**
+     * Add cards to a pile with no check for what those cards are
+     */
+    public void addToPileFree(int pilePos){
+        theTab.getPiles().get(pilePos).addCards(tempPile);
+    }
+
+    /**
+     * Adds cards from the stock to the talon
+     */
+
+    /**
+     * Simple getter method for the Stock
+     * @return theStock
+     */
+    public Stock getTheStock() {
+        return theStock;
+    }
+
+    /**
+     * Simple getter method for the Foundations
+     * @return theFoundations
+     */
+    public Foundations getTheFoundations() {
+        return theFoundations;
+    }
+
+    /**
+     * Simple getter method for the Talon
+     * @return theTalon
+     */
+    public Talon getTheTalon() {
+        return theTalon;
+    }
+
+    /**
+     * Simple getter method for the Tableau
+     * @return theTab
+     */
+    public Tableau getTheTab() {
+        return theTab;
+    }
+
+    /**
+     * When the Stock is empty, we should have the ability to fill it with all of the cards from the
+     * talon
+     */
+    public void resetStock(){
+        this.theStock.resetStock(this.theTalon.getCards());
+        this.theTalon.emptyTalon();
+    }
+
+    public void setTempPile(ArrayList<Card> c){
+        this.tempPile = c;
+    }
+
+    public ArrayList<Card> getTempPile(){
+        return this.tempPile;
+    }
+
+    /**
+     * Moves the contents of tempPile to Foundations and returns true upon success or false upon failure
+     */
+    public boolean addToFoundations() {
+        if(tempPile.size() == 1 && theFoundations.getTopCard(tempPile.get(0).getSuit()) == null &&
+        tempPile.get(0).getIntValue() == 1){
+            theFoundations.addCard(tempPile.get(0), tempPile.get(0).getSuit());
+            setSecondClickFalse();
+            onMove();
+            return true;
+        }
+        else if (tempPile.size() == 1 && theFoundations.getTopCard(tempPile.get(0).getSuit()) != null &&
+                tempPile.get(0).getIntValue() == theFoundations.getTopCard(tempPile.get(0).getSuit()).getIntValue() + 1){
+            theFoundations.addCard(tempPile.get(0), tempPile.get(0).getSuit());
+            setSecondClickFalse();
+            onMove();
+            return true;
+        }
+        else {
+            setSecondClickFalse();
+            reset();
+            return false;
+        }
+    }
+
+
 }
