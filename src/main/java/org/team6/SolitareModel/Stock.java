@@ -16,7 +16,9 @@
  ********************************************
  */
 
-package org.team6;
+package org.team6.SolitareModel;
+
+import org.team6.SolitareModel.Card;
 
 import java.util.ArrayList;
 

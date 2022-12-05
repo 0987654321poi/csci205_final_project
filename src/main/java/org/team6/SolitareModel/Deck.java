@@ -9,13 +9,16 @@
  *
  * Project: csci205_final_prject
  * Package: org.team6
- * Class: org.team6.Deck
+ * Class: org.team6.SolitareModel.Deck
  *
  * Description: Class representing a deck of cards
  *
  * *****************************************/
 
-package org.team6;
+package org.team6.SolitareModel;
+
+import org.team6.SolitareModel.Card;
+import org.team6.SolitareModel.Suit;
 
 import java.util.ArrayList;
 

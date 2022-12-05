@@ -16,7 +16,10 @@
  ********************************************
  */
 
-package org.team6;
+package org.team6.SolitareModel;
+
+import org.team6.SolitareModel.Card;
+import org.team6.SolitareModel.Suit;
 
 import java.util.ArrayList;
 
@@ -116,16 +119,16 @@ public class Foundations {
      * @return a card object
      */
     public Card getTopCard(Suit Suit){
-        if (hearts.size() > 0 && Suit.equals(org.team6.Suit.HEART)) {
+        if (hearts.size() > 0 && Suit.equals(org.team6.SolitareModel.Suit.HEART)) {
             return hearts.get(hearts.size()-1);
         }
-        else if (diamonds.size() > 0 && Suit.equals(org.team6.Suit.DIAMOND)) {
+        else if (diamonds.size() > 0 && Suit.equals(org.team6.SolitareModel.Suit.DIAMOND)) {
             return diamonds.get(diamonds.size()-1);
         }
-        else if (spades.size() > 0 && Suit.equals(org.team6.Suit.SPADE)) {
+        else if (spades.size() > 0 && Suit.equals(org.team6.SolitareModel.Suit.SPADE)) {
             return spades.get(spades.size()-1);
         }
-        else if (clubs.size() > 0 && Suit.equals(org.team6.Suit.CLUB)) {
+        else if (clubs.size() > 0 && Suit.equals(org.team6.SolitareModel.Suit.CLUB)) {
             return clubs.get(clubs.size()-1);
         }
         return null;

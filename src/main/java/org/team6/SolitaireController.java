@@ -31,6 +31,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import org.team6.SolitareModel.Card;
+import org.team6.SolitareModel.SolitaireModel;
 
 public class SolitaireController {
 

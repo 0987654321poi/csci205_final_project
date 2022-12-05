@@ -14,7 +14,10 @@
  * Description: Class representing the tableau, the group of piles that make up the bulk of the game
  *
  * *****************************************/
-package org.team6;
+package org.team6.SolitareModel;
+
+import org.team6.SolitareModel.Card;
+import org.team6.SolitareModel.Pile;
 
 import java.util.ArrayList;
 

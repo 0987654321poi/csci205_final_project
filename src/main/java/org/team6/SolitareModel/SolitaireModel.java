@@ -14,7 +14,7 @@
  * Description: Class representing all the functions needed to play the game of Solitaire
  *
  * *****************************************/
-package org.team6;
+package org.team6.SolitareModel;
 
 import java.util.ArrayList;
 

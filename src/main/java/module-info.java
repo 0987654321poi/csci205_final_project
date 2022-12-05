@@ -8,4 +8,6 @@ module csci205_final_project{
 
     exports org.team6;
     opens org.team6 to javafx.fxml;
+    exports org.team6.SolitareModel;
+    opens org.team6.SolitareModel to javafx.fxml;
 }

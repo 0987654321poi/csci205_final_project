@@ -14,10 +14,11 @@
  * Description: Class representing a pile of cards, where selecting any face up card
  *
  * *****************************************/
-package org.team6;
+package org.team6.SolitareModel;
+
+import org.team6.SolitareModel.Card;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * A class to encapsulate the idea of a pile of cards. Will be used to represent each pile in the tableau
