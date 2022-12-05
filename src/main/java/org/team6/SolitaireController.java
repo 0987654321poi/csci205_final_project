@@ -294,12 +294,15 @@ public class SolitaireController {
                     theGame.setSecondClickTrue();
                     ArrayList<Card> temp = new ArrayList<Card>();
                     temp.add(theGame.getTheTalon().drawCard());
+                    VBoxStockTalon.getChildren().get(1).setEffect(new DropShadow(20, Color.GOLD));
                     theGame.setTempPile(temp);
                     theGame.setLastMovedFrom(8);
                 }
                 else {
                     theGame.reset();
+                    VBoxStockTalon.getChildren().get(1).setEffect(null);
                     clear();
+
                     theGame.setSecondClickFalse();
                 }
             });
