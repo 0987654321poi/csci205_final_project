@@ -17,6 +17,7 @@
 package org.team6.SolitareModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SolitaireModel {
     /**
@@ -129,10 +130,6 @@ public class SolitaireModel {
         }
     }
 
-    //public void resetStock(){
-
-    //}
-
 
     /**
      * Moves the contents of tempPile to a new given index of pile
@@ -225,9 +222,18 @@ public class SolitaireModel {
      * talon
      */
     public void resetStock(){
-        moveCounter++;
-        this.theStock.resetStock(this.theTalon.getCards());
-        this.theTalon.emptyTalon();
+        if(theStock.isEmpty()) {
+            moveCounter++;
+            ArrayList<Card> tempToBeMovedToStock = this.theTalon.getCards();
+            Collections.reverse(tempToBeMovedToStock);
+            for (Card card : tempToBeMovedToStock) {
+                if (card != null) {
+                    card.flip();
+                }
+            }
+            theTalon.emptyTalon();
+            theStock.resetStock(tempToBeMovedToStock);
+        }
     }
 
     public void setTempPile(ArrayList<Card> c){

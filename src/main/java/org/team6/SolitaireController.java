@@ -326,18 +326,8 @@ public class SolitaireController {
         //Takes cards from the talon and reverses the array list as the input for the new
         //stock
         btnResetStock.setOnAction(event -> {
-            if(theModel.getTheStock().isEmpty()) {
-                ArrayList<Card> tempToBeMovedToStock = theModel.getTheTalon().getCards();
-                Collections.reverse(tempToBeMovedToStock);
-                for(Card card: tempToBeMovedToStock) {
-                    if(card != null) {
-                        card.flip();
-                    }
-                }
-                theModel.getTheTalon().emptyTalon();
-                theModel.getTheStock().resetStock(tempToBeMovedToStock);
-                clear();
-            }
+            theModel.resetStock();
+            clear();
         });
     }
 

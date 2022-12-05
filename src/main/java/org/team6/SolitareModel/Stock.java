@@ -78,4 +78,7 @@ public class Stock {
         return null;
     }
 
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
 }
