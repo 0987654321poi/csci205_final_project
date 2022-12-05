@@ -20,6 +20,8 @@ package org.team6;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -85,9 +87,9 @@ public class SolitaireController {
     @FXML
     private VBox VBoxStockTalon;
 
-    /** Undo Button */
+    /**Reset Stock Button */
     @FXML
-    private Button btnUndo;
+    private Button btnResetStock;
 
     /** Label to keep track of moves made */
     @FXML
@@ -109,7 +111,7 @@ public class SolitaireController {
         assert VBoxPile6 != null : "fx:id=\"VBoxPile6\" was not injected: check your FXML file 'solitaire.fxml'.";
         assert VBoxPile7 != null : "fx:id=\"VBoxPile7\" was not injected: check your FXML file 'solitaire.fxml'.";
         assert VBoxStockTalon != null : "fx:id=\"VBoxStockTalon\" was not injected: check your FXML file 'solitaire.fxml'.";
-        assert btnUndo != null : "fx:id=\"btnUndo\" was not injected: check your FXML file 'solitaire.fxml'.";
+        assert btnResetStock != null : "fx:id=\"btnResetStock\" was not injected: check your FXML file 'solitaire.fxml'.";
         assert lblMoves != null : "fx:id=\"lblMoves\" was not injected: check your FXML file 'solitaire.fxml'.";
         assert lblTime != null : "fx:id=\"lblTime\" was not injected: check your FXML file 'solitaire.fxml'.";
     }
@@ -236,6 +238,9 @@ public class SolitaireController {
         if(theGame.getTheStock().getTopCard() != null) {
             StockView.setImage(theGame.getTheStock().getTopCard().getAssociatedImage());
         }
+        else{
+            StockView.setImage(new Image(getClass().getResourceAsStream("/Empty.png")));
+        }
         StockView.setFitHeight(50);
         StockView.setFitWidth(40);
 
@@ -276,6 +281,7 @@ public class SolitaireController {
             else
                 theGame.setSecondClickFalse();
         }));
+
     }
 
     private void initTalonLogic(Game theGame) {
@@ -311,6 +317,23 @@ public class SolitaireController {
                 theGame.reset();
                 clear();
                 theGame.setSecondClickFalse();
+            }
+        });
+        //Moves the cards back to the stock from the talon only if the stock is empty
+        //Takes cards from the talon and reverses the array list as the input for the new
+        //stock
+        btnResetStock.setOnAction(event -> {
+            if(theGame.getTheStock().isEmpty()) {
+                ArrayList<Card> tempToBeMovedToStock = theGame.getTheTalon().getCards();
+                Collections.reverse(tempToBeMovedToStock);
+                for(Card card: tempToBeMovedToStock) {
+                    if(card != null) {
+                        card.flip();
+                    }
+                }
+                theGame.getTheTalon().emptyTalon();
+                theGame.getTheStock().resetStock(tempToBeMovedToStock);
+                clear();
             }
         });
     }
