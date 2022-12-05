@@ -61,6 +61,9 @@ public class SolitaireModel {
      */
     private int lastMovedFrom = -1;
 
+    /** Counter to keep track of moves */
+    private int moveCounter = 0;
+
     /**
      * Constructor for the game class, creates the stock, talon, tableau, etc. and fills them all
      * with cards
@@ -86,6 +89,7 @@ public class SolitaireModel {
         }
     }
 
+    public int getMoveCounter() { return moveCounter; }
     public int getLastMovedFrom(){
         return lastMovedFrom;
     }
@@ -118,6 +122,7 @@ public class SolitaireModel {
 
     public void draw(){
         if(!theStock.isEmpty()) {
+            moveCounter++;
             Card c = theStock.drawCard();
             c.flip();
             theTalon.addCard(c);
@@ -138,6 +143,7 @@ public class SolitaireModel {
             Card c = tempPile.get(0);
             if(theTab.getPiles().get(pilePos).getPile().size() == 0 && tempPile.get(0).getIntValue() == 13 &&
             c.getIsFaceUp()){
+                moveCounter++;
                 theTab.getPiles().get(pilePos).addCards(tempPile);
                 setSecondClickFalse();
                 onMove();
@@ -146,6 +152,7 @@ public class SolitaireModel {
             else if (c.getIntValue() == theTab.getPiles().get(pilePos).getTopCard().getIntValue() - 1 &&
                     !c.getColor().equals(theTab.getPiles().get(pilePos).getTopCard().getColor()) &&
                     c.getIsFaceUp()) {
+                moveCounter++;
                 theTab.getPiles().get(pilePos).addCards(tempPile);
                 setSecondClickFalse();
                 onMove();
@@ -218,6 +225,7 @@ public class SolitaireModel {
      * talon
      */
     public void resetStock(){
+        moveCounter++;
         this.theStock.resetStock(this.theTalon.getCards());
         this.theTalon.emptyTalon();
     }
@@ -236,6 +244,7 @@ public class SolitaireModel {
     public boolean addToFoundations() {
         if(tempPile.size() == 1 && theFoundations.getTopCard(tempPile.get(0).getSuit()) == null &&
         tempPile.get(0).getIntValue() == 1){
+            moveCounter++;
             theFoundations.addCard(tempPile.get(0), tempPile.get(0).getSuit());
             setSecondClickFalse();
             onMove();
@@ -246,6 +255,7 @@ public class SolitaireModel {
             theFoundations.addCard(tempPile.get(0), tempPile.get(0).getSuit());
             setSecondClickFalse();
             onMove();
+            moveCounter++;
             return true;
         }
         else {

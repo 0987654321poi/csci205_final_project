@@ -269,6 +269,7 @@ public class SolitaireController {
         initStockLogic(theModel);
         initTalonLogic(theModel);
         VBoxFoundations.getChildren().forEach(child -> child.setOnMouseClicked(event -> {
+            lblMoves.setText(Integer.toString(theModel.getMoveCounter()));
             if(theModel.getSecondClick()) {
                 theModel.addToFoundations();
                 clear();
@@ -281,6 +282,7 @@ public class SolitaireController {
 
     private void initTalonLogic(SolitaireModel theModel) {
         //The talon
+        lblMoves.setText(Integer.toString(theModel.getMoveCounter()));
         if(VBoxStockTalon.getChildren().size() > 1) {
             VBoxStockTalon.getChildren().get(1).setOnMouseClicked(event -> {
                 //You can not make moves to the talon, only from, so a click on the talon will set
@@ -306,6 +308,7 @@ public class SolitaireController {
 
     private void initStockLogic(SolitaireModel theModel) {
         //The stock
+        lblMoves.setText(Integer.toString(theModel.getMoveCounter()));
         VBoxStockTalon.getChildren().get(0).setOnMouseClicked(event -> {
             if(!theModel.getSecondClick()) {
                 theModel.draw();
@@ -337,6 +340,7 @@ public class SolitaireController {
     }
 
     private void initPileLogic(VBox VBoxPile1, SolitaireModel theModel, int index) {
+        lblMoves.setText(Integer.toString(theModel.getMoveCounter()));
         VBoxPile1.getChildren().forEach(node -> node.setOnMouseClicked(event ->
         {
             int ind = VBoxPile1.getChildren().indexOf(node);
