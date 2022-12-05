@@ -358,8 +358,10 @@ public class SolitaireController {
                     theGame.addToPile(index);
                     clear();
                 }
-                else
+                else {
                     theGame.reset();
+                    VBoxPile1.getChildren().get(ind).setEffect(null);
+                }
                 theGame.setSecondClickFalse();
             }
         }));
