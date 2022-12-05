@@ -326,7 +326,7 @@ public class SolitaireController {
                 }
                 theGame.getTheTalon().emptyTalon();
                 theGame.getTheStock().resetStock(tempToBeMovedToStock);
-                addStock(theGame);
+                clear();
             }
         });
     }
