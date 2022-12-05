@@ -24,10 +24,12 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
@@ -316,15 +318,20 @@ public class SolitaireController {
     private void initPileLogic(VBox VBoxPile1, Game theGame, int index) {
         VBoxPile1.getChildren().forEach(node -> node.setOnMouseClicked(event ->
         {
+            int ind = VBoxPile1.getChildren().indexOf(node);
             if(!theGame.getSecondClick()) {
                 if(!theGame.getTheTab().getPiles().get(index).getPile().get(VBoxPile1.getChildren().indexOf(node)).getIsFaceUp() == false){
                     theGame.setTempPile(theGame.getTheTab().getPiles().get(index).split(VBoxPile1.getChildren().indexOf(node)));
                     theGame.setSecondClickTrue();
-                    theGame.setLastMovedFrom(index);
+
+                    //Add Card Glow
+                        VBoxPile1.getChildren().get(ind).setEffect(new DropShadow(20, Color.GOLD));
+                        theGame.setLastMovedFrom(index);
                 }
             }
             else {
                 if(theGame.getLastMovedFrom() != index) {
+                    VBoxPile1.getChildren().get(ind).setEffect(null);
                     theGame.addToPile(index);
                     clear();
                 }
