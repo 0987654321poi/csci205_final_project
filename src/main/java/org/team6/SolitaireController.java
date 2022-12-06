@@ -118,13 +118,24 @@ public class SolitaireController {
      */
     public void addCards() {
         Game theGame = theModel.getTheGame();
-        addStock(theGame);
+        //Adds the win screen
+        if(theGame.isGameWon()){
+            VBoxPile1.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/Y.png"))));
+            VBoxPile1.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/O.png"))));
+            VBoxPile1.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/U.png"))));
+            VBoxPile2.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/W.png"))));
+            VBoxPile2.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/I.png"))));
+            VBoxPile2.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/N.png"))));
+        }
+        else {
+            addStock(theGame);
 
-        addTalon(theGame);
+            addTalon(theGame);
 
-        addTableau(theGame);
+            addTableau(theGame);
 
-        addFoundations(theGame);
+            addFoundations(theGame);
+        }
     }
 
     private void addFoundations(Game theGame){

@@ -54,6 +54,10 @@ public class Game {
      */
     private Deck theDeck;
 
+    /**
+     * Variable storing whether a click is a first click which sets the card to be moved or a
+     * second click to move the card
+     */
     private boolean secondClick = false;
 
     /**
@@ -91,6 +95,7 @@ public class Game {
         }
     }
 
+
     public int getLastMovedFrom(){
         return lastMovedFrom;
     }
@@ -121,6 +126,9 @@ public class Game {
         }
     }
 
+    /**
+     * Method for drawing a card from the stock to appear in the talon
+     */
     public void draw(){
         if(!theStock.isEmpty()) {
             Card c = theStock.drawCard();
@@ -129,10 +137,14 @@ public class Game {
         }
     }
 
-    //public void resetStock(){
-
-    //}
-
+    /**
+     * Boolean variable that gives whether the game is won, which happens when the foundation
+     * is full
+     * @return
+     */
+    public boolean isGameWon(){
+        return theFoundations.gameFinished();
+    }
 
     /**
      * Moves the contents of tempPile to a new given index of pile
@@ -148,7 +160,7 @@ public class Game {
                 onMove();
                 return true;
             }
-            else if (c.getIntValue() == theTab.getPiles().get(pilePos).getTopCard().getIntValue() - 1 &&
+            else if (theTab.getPiles().get(pilePos).getPile().size() != 0 && c.getIntValue() == theTab.getPiles().get(pilePos).getTopCard().getIntValue() - 1 &&
                     !c.getColor().equals(theTab.getPiles().get(pilePos).getTopCard().getColor()) &&
                     c.getIsFaceUp()) {
                 theTab.getPiles().get(pilePos).addCards(tempPile);
