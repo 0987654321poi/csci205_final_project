@@ -14,16 +14,12 @@
  * Description: Class representing all the functions needed to play the game of Solitaire
  *
  * *****************************************/
-package org.team6;
-
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
+package org.team6.SolitareModel;
 
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Stack;
+import java.util.Collections;
 
-public class Game {
+public class SolitaireModel {
     /**
      * The stock for our solitaire game
      */
@@ -54,10 +50,6 @@ public class Game {
      */
     private Deck theDeck;
 
-    /**
-     * Variable storing whether a click is a first click which sets the card to be moved or a
-     * second click to move the card
-     */
     private boolean secondClick = false;
 
     /**
@@ -70,11 +62,14 @@ public class Game {
      */
     private int lastMovedFrom = -1;
 
+    /** Counter to keep track of moves */
+    private int moveCounter = 0;
+
     /**
      * Constructor for the game class, creates the stock, talon, tableau, etc. and fills them all
      * with cards
      */
-    public Game() {
+    public SolitaireModel() {
         theDeck = new Deck();
         theDeck.fillStandardDeck();
         theDeck.shuffle();
@@ -95,7 +90,11 @@ public class Game {
         }
     }
 
+    public boolean isGameFinished(){
+        return theFoundations.gameFinished();
+    }
 
+    public int getMoveCounter() { return moveCounter; }
     public int getLastMovedFrom(){
         return lastMovedFrom;
     }
@@ -126,25 +125,15 @@ public class Game {
         }
     }
 
-    /**
-     * Method for drawing a card from the stock to appear in the talon
-     */
     public void draw(){
         if(!theStock.isEmpty()) {
+            moveCounter++;
             Card c = theStock.drawCard();
             c.flip();
             theTalon.addCard(c);
         }
     }
 
-    /**
-     * Boolean variable that gives whether the game is won, which happens when the foundation
-     * is full
-     * @return
-     */
-    public boolean isGameWon(){
-        return theFoundations.gameFinished();
-    }
 
     /**
      * Moves the contents of tempPile to a new given index of pile
@@ -155,6 +144,7 @@ public class Game {
             Card c = tempPile.get(0);
             if(theTab.getPiles().get(pilePos).getPile().size() == 0 && tempPile.get(0).getIntValue() == 13 &&
             c.getIsFaceUp()){
+                moveCounter++;
                 theTab.getPiles().get(pilePos).addCards(tempPile);
                 setSecondClickFalse();
                 onMove();
@@ -163,6 +153,7 @@ public class Game {
             else if (theTab.getPiles().get(pilePos).getPile().size() != 0 && c.getIntValue() == theTab.getPiles().get(pilePos).getTopCard().getIntValue() - 1 &&
                     !c.getColor().equals(theTab.getPiles().get(pilePos).getTopCard().getColor()) &&
                     c.getIsFaceUp()) {
+                moveCounter++;
                 theTab.getPiles().get(pilePos).addCards(tempPile);
                 setSecondClickFalse();
                 onMove();
@@ -235,8 +226,18 @@ public class Game {
      * talon
      */
     public void resetStock(){
-        this.theStock.resetStock(this.theTalon.getCards());
-        this.theTalon.emptyTalon();
+        if(theStock.isEmpty()) {
+            moveCounter++;
+            ArrayList<Card> tempToBeMovedToStock = this.theTalon.getCards();
+            Collections.reverse(tempToBeMovedToStock);
+            for (Card card : tempToBeMovedToStock) {
+                if (card != null) {
+                    card.flip();
+                }
+            }
+            theTalon.emptyTalon();
+            theStock.resetStock(tempToBeMovedToStock);
+        }
     }
 
     public void setTempPile(ArrayList<Card> c){
@@ -253,6 +254,7 @@ public class Game {
     public boolean addToFoundations() {
         if(tempPile.size() == 1 && theFoundations.getTopCard(tempPile.get(0).getSuit()) == null &&
         tempPile.get(0).getIntValue() == 1){
+            moveCounter++;
             theFoundations.addCard(tempPile.get(0), tempPile.get(0).getSuit());
             setSecondClickFalse();
             onMove();
@@ -263,6 +265,7 @@ public class Game {
             theFoundations.addCard(tempPile.get(0), tempPile.get(0).getSuit());
             setSecondClickFalse();
             onMove();
+            moveCounter++;
             return true;
         }
         else {

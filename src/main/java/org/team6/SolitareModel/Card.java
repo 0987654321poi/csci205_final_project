@@ -14,9 +14,8 @@
  * Description: Class representing a single org.team6.card
  *
  * *****************************************/
-package org.team6;
+package org.team6.SolitareModel;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
 
 /**

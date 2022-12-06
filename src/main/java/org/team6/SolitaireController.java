@@ -20,17 +20,19 @@ package org.team6;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Shape;
+import javafx.scene.paint.Color;
+import org.team6.SolitareModel.Card;
+import org.team6.SolitareModel.SolitaireModel;
 
 public class SolitaireController {
 
@@ -83,9 +85,9 @@ public class SolitaireController {
     @FXML
     private VBox VBoxStockTalon;
 
-    /** Undo Button */
+    /**Reset Stock Button */
     @FXML
-    private Button btnUndo;
+    private Button btnResetStock;
 
     /** Label to keep track of moves made */
     @FXML
@@ -107,7 +109,7 @@ public class SolitaireController {
         assert VBoxPile6 != null : "fx:id=\"VBoxPile6\" was not injected: check your FXML file 'solitaire.fxml'.";
         assert VBoxPile7 != null : "fx:id=\"VBoxPile7\" was not injected: check your FXML file 'solitaire.fxml'.";
         assert VBoxStockTalon != null : "fx:id=\"VBoxStockTalon\" was not injected: check your FXML file 'solitaire.fxml'.";
-        assert btnUndo != null : "fx:id=\"btnUndo\" was not injected: check your FXML file 'solitaire.fxml'.";
+        assert btnResetStock != null : "fx:id=\"btnResetStock\" was not injected: check your FXML file 'solitaire.fxml'.";
         assert lblMoves != null : "fx:id=\"lblMoves\" was not injected: check your FXML file 'solitaire.fxml'.";
         assert lblTime != null : "fx:id=\"lblTime\" was not injected: check your FXML file 'solitaire.fxml'.";
     }
@@ -117,9 +119,7 @@ public class SolitaireController {
      * the view
      */
     public void addCards() {
-        Game theGame = theModel.getTheGame();
-        //Adds the win screen
-        if(theGame.isGameWon()){
+        if(theModel.isGameFinished()){
             VBoxPile1.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/Y.png"))));
             VBoxPile1.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/O.png"))));
             VBoxPile1.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/U.png"))));
@@ -128,41 +128,41 @@ public class SolitaireController {
             VBoxPile2.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/N.png"))));
         }
         else {
-            addStock(theGame);
+            addStock(theModel);
 
-            addTalon(theGame);
+            addTalon(theModel);
 
-            addTableau(theGame);
+            addTableau(theModel);
 
-            addFoundations(theGame);
+            addFoundations(theModel);
         }
     }
 
-    private void addFoundations(Game theGame){
+    private void addFoundations(SolitaireModel theModel){
         for(int i = 0; i < 4; i++) {
             ImageView imView = new ImageView();
             switch (i) {
                 case 0:
-                    if(theGame.getTheFoundations().getTopHeart()!= null)
-                        imView.setImage(theGame.getTheFoundations().getTopHeart().getAssociatedImage());
+                    if(theModel.getTheFoundations().getTopHeart()!= null)
+                        imView.setImage(theModel.getTheFoundations().getTopHeart().getAssociatedImage());
                     else
                         imView.setImage(new Image(getClass().getResourceAsStream("/Empty.png")));
                     break;
                 case 1:
-                    if(theGame.getTheFoundations().getTopSpade()!= null)
-                        imView.setImage(theGame.getTheFoundations().getTopSpade().getAssociatedImage());
+                    if(theModel.getTheFoundations().getTopSpade()!= null)
+                        imView.setImage(theModel.getTheFoundations().getTopSpade().getAssociatedImage());
                     else
                         imView.setImage(new Image(getClass().getResourceAsStream("/Empty.png")));
                     break;
                 case 2:
-                    if(theGame.getTheFoundations().getTopDiamond()!= null)
-                        imView.setImage(theGame.getTheFoundations().getTopDiamond().getAssociatedImage());
+                    if(theModel.getTheFoundations().getTopDiamond()!= null)
+                        imView.setImage(theModel.getTheFoundations().getTopDiamond().getAssociatedImage());
                     else
                         imView.setImage(new Image(getClass().getResourceAsStream("/Empty.png")));
                     break;
                 case 3:
-                    if(theGame.getTheFoundations().getTopClub()!= null)
-                        imView.setImage(theGame.getTheFoundations().getTopClub().getAssociatedImage());
+                    if(theModel.getTheFoundations().getTopClub()!= null)
+                        imView.setImage(theModel.getTheFoundations().getTopClub().getAssociatedImage());
                     else
                         imView.setImage(new Image(getClass().getResourceAsStream("/Empty.png")));
                     break;
@@ -175,22 +175,22 @@ public class SolitaireController {
         }
     }
 
-    private void addTableau(Game theGame) {
+    private void addTableau(SolitaireModel theModel) {
         ImageView imageView = new ImageView();
-        for (int i = 0; i < theGame.getTheTab().getPiles().size(); i++)
-            addPile(theGame,i);
+        for (int i = 0; i < theModel.getTheTab().getPiles().size(); i++)
+            addPile(theModel,i);
     }
 
-    private void addPile(Game theGame, int pileIndex){
-        if(theGame.getTheTab().getPiles().get(pileIndex).getPile().size() == 0) {
+    private void addPile(SolitaireModel theModel, int pileIndex){
+        if(theModel.getTheTab().getPiles().get(pileIndex).getPile().size() == 0) {
             ImageView imView = new ImageView();
             imView.setImage(new Image(getClass().getResourceAsStream("/Empty.png")));
 
             addImageToPile(pileIndex, imView);
         }
-        for(int j = 0; j < theGame.getTheTab().getPiles().get(pileIndex).getPile().size(); j++) {
+        for(int j = 0; j < theModel.getTheTab().getPiles().get(pileIndex).getPile().size(); j++) {
             ImageView imView = new ImageView();
-            imView.setImage(theGame.getTheTab().getPiles().get(pileIndex).getPile().get(j).getAssociatedImage());
+            imView.setImage(theModel.getTheTab().getPiles().get(pileIndex).getPile().get(j).getAssociatedImage());
 
             addImageToPile(pileIndex, imView);
         }
@@ -226,10 +226,10 @@ public class SolitaireController {
         }
     }
 
-    private void addTalon(Game theGame) {
-        if(theGame.getTheTalon().getTopCard() != null) {
+    private void addTalon(SolitaireModel theModel) {
+        if(theModel.getTheTalon().getTopCard() != null) {
             ImageView TalonView = new ImageView();
-            TalonView.setImage(theGame.getTheTalon().getTopCard().getAssociatedImage());
+            TalonView.setImage(theModel.getTheTalon().getTopCard().getAssociatedImage());
 
             TalonView.setFitHeight(50);
             TalonView.setFitWidth(40);
@@ -240,10 +240,13 @@ public class SolitaireController {
         }
     }
 
-    private void addStock(Game theGame) {
+    private void addStock(SolitaireModel theModel) {
         ImageView StockView = new ImageView();
-        if(theGame.getTheStock().getTopCard() != null) {
-            StockView.setImage(theGame.getTheStock().getTopCard().getAssociatedImage());
+        if(theModel.getTheStock().getTopCard() != null) {
+            StockView.setImage(theModel.getTheStock().getTopCard().getAssociatedImage());
+        }
+        else{
+            StockView.setImage(new Image(getClass().getResourceAsStream("/Empty.png")));
         }
         StockView.setFitHeight(50);
         StockView.setFitWidth(40);
@@ -264,10 +267,10 @@ public class SolitaireController {
         VBoxStockTalon.getChildren().clear();
         VBoxFoundations.getChildren().clear();
         addCards();
-        initEventHandlers(theModel.getTheGame());
+        initEventHandlers(theModel);
     }
 
-    private void initEventHandlers(Game theGame){
+    private void initEventHandlers(SolitaireModel theGame){
         initPileLogic(VBoxPile1, theGame, 0);
         initPileLogic(VBoxPile2, theGame, 1);
         initPileLogic(VBoxPile3, theGame, 2);
@@ -275,73 +278,95 @@ public class SolitaireController {
         initPileLogic(VBoxPile5, theGame, 4);
         initPileLogic(VBoxPile6, theGame, 5);
         initPileLogic(VBoxPile7, theGame, 6);
-        initStockLogic(theGame);
-        initTalonLogic(theGame);
+        initStockLogic(theModel);
+        initTalonLogic(theModel);
         VBoxFoundations.getChildren().forEach(child -> child.setOnMouseClicked(event -> {
-            if(theGame.getSecondClick()) {
-                theGame.addToFoundations();
+            lblMoves.setText(Integer.toString(theModel.getMoveCounter()));
+            if(theModel.getSecondClick()) {
+                theModel.addToFoundations();
                 clear();
             }
             else
-                theGame.setSecondClickFalse();
+                theModel.setSecondClickFalse();
         }));
+
     }
 
-    private void initTalonLogic(Game theGame) {
+    private void initTalonLogic(SolitaireModel theModel) {
         //The talon
+        lblMoves.setText(Integer.toString(theModel.getMoveCounter()));
         if(VBoxStockTalon.getChildren().size() > 1) {
             VBoxStockTalon.getChildren().get(1).setOnMouseClicked(event -> {
                 //You can not make moves to the talon, only from, so a click on the talon will set
                 //secondClick to true
-                if(!theGame.getSecondClick()) {
-                    theGame.setSecondClickTrue();
+                if(!theModel.getSecondClick()) {
+                    theModel.setSecondClickTrue();
                     ArrayList<Card> temp = new ArrayList<Card>();
-                    temp.add(theGame.getTheTalon().drawCard());
-                    theGame.setTempPile(temp);
-                    theGame.setLastMovedFrom(8);
+                    temp.add(theModel.getTheTalon().drawCard());
+                    VBoxStockTalon.getChildren().get(1).setEffect(new DropShadow(20, Color.GOLD));
+                    theModel.setTempPile(temp);
+                    theModel.setLastMovedFrom(8);
                 }
                 else {
-                    theGame.reset();
+                    theModel.reset();
+                    VBoxStockTalon.getChildren().get(1).setEffect(null);
                     clear();
-                    theGame.setSecondClickFalse();
+
+                    theModel.setSecondClickFalse();
                 }
             });
         }
     }
 
-    private void initStockLogic(Game theGame) {
+    private void initStockLogic(SolitaireModel theModel) {
         //The stock
+        lblMoves.setText(Integer.toString(theModel.getMoveCounter()));
         VBoxStockTalon.getChildren().get(0).setOnMouseClicked(event -> {
-            if(!theGame.getSecondClick()) {
-                theGame.draw();
+            if(!theModel.getSecondClick()) {
+                theModel.draw();
                 clear();
             }
             else {
-                theGame.reset();
+                theModel.reset();
                 clear();
-                theGame.setSecondClickFalse();
+                theModel.setSecondClickFalse();
             }
+        });
+        //Moves the cards back to the stock from the talon only if the stock is empty
+        //Takes cards from the talon and reverses the array list as the input for the new
+        //stock
+        btnResetStock.setOnAction(event -> {
+            theModel.resetStock();
+            clear();
         });
     }
 
-    private void initPileLogic(VBox VBoxPile1, Game theGame, int index) {
+    private void initPileLogic(VBox VBoxPile1, SolitaireModel theModel, int index) {
+        lblMoves.setText(Integer.toString(theModel.getMoveCounter()));
         VBoxPile1.getChildren().forEach(node -> node.setOnMouseClicked(event ->
         {
-            if(!theGame.getSecondClick()) {
-                if(!theGame.getTheTab().getPiles().get(index).getPile().get(VBoxPile1.getChildren().indexOf(node)).getIsFaceUp() == false){
-                    theGame.setTempPile(theGame.getTheTab().getPiles().get(index).split(VBoxPile1.getChildren().indexOf(node)));
-                    theGame.setSecondClickTrue();
-                    theGame.setLastMovedFrom(index);
+            int ind = VBoxPile1.getChildren().indexOf(node);
+            if(!theModel.getSecondClick()) {
+                if(!theModel.getTheTab().getPiles().get(index).getPile().get(VBoxPile1.getChildren().indexOf(node)).getIsFaceUp() == false){
+                    theModel.setTempPile(theModel.getTheTab().getPiles().get(index).split(VBoxPile1.getChildren().indexOf(node)));
+                    theModel.setSecondClickTrue();
+
+                    //Add Card Glow
+                        VBoxPile1.getChildren().get(ind).setEffect(new DropShadow(20, Color.GOLD));
+                        theModel.setLastMovedFrom(index);
                 }
             }
             else {
-                if(theGame.getLastMovedFrom() != index) {
-                    theGame.addToPile(index);
+                if(theModel.getLastMovedFrom() != index) {
+                    VBoxPile1.getChildren().get(ind).setEffect(null);
+                    theModel.addToPile(index);
                     clear();
                 }
-                else
-                    theGame.reset();
-                theGame.setSecondClickFalse();
+                else {
+                    theModel.reset();
+                    VBoxPile1.getChildren().get(ind).setEffect(null);
+                }
+                theModel.setSecondClickFalse();
             }
         }));
     }
@@ -349,7 +374,7 @@ public class SolitaireController {
     public void setModel(SolitaireModel model){
         this.theModel = model;
         addCards();
-        initEventHandlers(theModel.getTheGame());
+        initEventHandlers(theModel);
     }
 
 }

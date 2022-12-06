@@ -16,18 +16,21 @@
  ********************************************
  */
 
-package org.team6;
+package org.team6.SolitareModel;
+
+import org.team6.SolitareModel.Card;
 
 import java.util.ArrayList;
 
 public class Stock {
     /**
-     * Arraylist to store the cards in the stock
+     * Arraylist of cards to store the cards in the stock
      */
     ArrayList<Card> cards;
 
     /**
-     * Creates a new stock with all of the cards that need to be in the stock when the
+     * Stock Constructor class
+     * Creates a new stock with all cards that need to be contained within the stock when the
      * game starts
      * @param cards - the cards that need to be added to the stock at the beginning of the game
      */
@@ -36,8 +39,8 @@ public class Stock {
     }
 
     /**
-     * Draws the top card from the stock
-     * @return
+     * Draws the top card from the stock and returns it
+     * @return out - the top card of the stock being returned
      */
     public Card drawCard(){
         Card out = null;
@@ -50,6 +53,7 @@ public class Stock {
 
     /**
      * Resets the stock with more cards
+     * this occurs when the talon has received all the cards contained in the stock
      * @param newStock - the array list of cards which will become the new stock
      */
     public void resetStock(ArrayList<Card> newStock){
@@ -57,7 +61,7 @@ public class Stock {
     }
 
     /**
-     *
+     * simple boolean that determine if the stock is empty (contains no Cards)
      * @return boolean, is the stock empty
      */
     public boolean isEmpty(){
@@ -65,7 +69,7 @@ public class Stock {
     }
 
     /**
-     * Returns the top card but does not remove it
+     * Returns the top card but does not remove it (effectively 'peeks' the top card)
      * @return the top card in the stock
      */
     public Card getTopCard(){
@@ -74,4 +78,7 @@ public class Stock {
         return null;
     }
 
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
 }
