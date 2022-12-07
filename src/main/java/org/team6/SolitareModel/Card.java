@@ -9,9 +9,9 @@
  *
  * Project: csci205_final_prject
  * Package: org.team6
- * Class: org.team6.card
+ * Class: Card
  *
- * Description: Class representing a single org.team6.card
+ * Description: Class representing a single Card
  *
  * *****************************************/
 package org.team6.SolitareModel;

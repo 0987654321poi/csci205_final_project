@@ -2,14 +2,14 @@
  * CSCI205 -Software Engineering and Design
  * Fall2022* Instructor: Prof. Brian King
  *
- * Name: Kevin Page
+ * Name: TEAM 6
  * Section: 9:00
  * Date: 11/18/2022
  * Time: 9:03 AM
  *
  * Project: csci205_final_prject
  * Package: org.team6
- * Class: Game
+ * Class: SolitaireModel
  *
  * Description: Class representing all the functions needed to play the game of Solitaire
  *
@@ -90,26 +90,54 @@ public class SolitaireModel {
         }
     }
 
+    /**
+     * Method to check if the game is over if the Foundations is Full
+     * @return Boolean representing if the game is finished
+     */
     public boolean isGameFinished(){
         return theFoundations.gameFinished();
     }
 
+    /**
+     * Simple getter method for Move counter
+     * @return getMoveCounter
+     */
     public int getMoveCounter() { return moveCounter; }
+
+    /**
+     * Simple getter method for LastMovedFrom
+     * @return lastMovedFrom
+     */
     public int getLastMovedFrom(){
         return lastMovedFrom;
     }
 
+    /**
+     * Simple setter Method for lastMovedFrom
+     * @param PilePos an Integer representing what pile was moved From
+     */
     public void setLastMovedFrom(int PilePos){
         lastMovedFrom = PilePos;
     }
 
+    /**
+     * Method for setting secondClick to False
+     */
     public void setSecondClickFalse(){
         secondClick = false;
     }
+
+    /**
+     * Method for setting secondClick to True
+     */
     public void setSecondClickTrue(){
         secondClick = true;
     }
 
+    /**
+     * Simple getter method for secondClick
+     * @return secondClick
+     */
     public Boolean getSecondClick(){
         return this.secondClick;
     }
@@ -125,6 +153,9 @@ public class SolitaireModel {
         }
     }
 
+    /**
+     * Method for drawing a card from the stock to the talon and flipping it
+     */
     public void draw(){
         if(!theStock.isEmpty()) {
             moveCounter++;
@@ -240,10 +271,18 @@ public class SolitaireModel {
         }
     }
 
+    /**
+     * Setter method for the tempPile
+     * @param c an Arraylist of one or more cards
+     */
     public void setTempPile(ArrayList<Card> c){
         this.tempPile = c;
     }
 
+    /**
+     * Simple getter method for tempPile
+     * @return tempPile
+     */
     public ArrayList<Card> getTempPile(){
         return this.tempPile;
     }

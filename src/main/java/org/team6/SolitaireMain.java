@@ -1,3 +1,20 @@
+/* *****************************************
+ * CSCI205 -Software Engineering and Design
+ * Fall2022* Instructor: Prof. Brian King
+ *
+ * Name: TEAM 6
+ * Section: 9:00
+ * Date: 11/16/2022
+ * Time: 12:04 AM
+ *
+ * Project: csci205_final_prject
+ * Package: org.team6
+ * Class: SolitaireMain
+ *
+ * Description: Main class for the Solitaire JavaFX application
+ *
+ * *****************************************/
+
 package org.team6;
 
 import javafx.application.Application;
