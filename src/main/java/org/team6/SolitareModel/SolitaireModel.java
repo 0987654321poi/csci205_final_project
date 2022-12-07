@@ -2,14 +2,14 @@
  * CSCI205 -Software Engineering and Design
  * Fall2022* Instructor: Prof. Brian King
  *
- * Name: Kevin Page
+ * Name: TEAM 6
  * Section: 9:00
  * Date: 11/18/2022
  * Time: 9:03 AM
  *
  * Project: csci205_final_prject
  * Package: org.team6
- * Class: Game
+ * Class: SolitaireModel
  *
  * Description: Class representing all the functions needed to play the game of Solitaire
  *

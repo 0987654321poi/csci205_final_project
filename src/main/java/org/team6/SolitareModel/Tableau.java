@@ -2,7 +2,7 @@
  * CSCI205 -Software Engineering and Design
  * Fall2022* Instructor: Prof. Brian King
  *
- * Name: Kevin Page
+ * Name: TEAM 6
  * Section: 9:00
  * Date: 11/11/2022
  * Time: 9:03 AM

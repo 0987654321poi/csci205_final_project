@@ -3,7 +3,7 @@
  * Fall2022
  * Instructor: Prof. Brian King
  *
- * Name: Alejandro Vargas Altamirano
+ * Name: TEAM 6
  * Date: 11/14/2022
  * Time: 9:15 AM
  *
@@ -11,7 +11,7 @@
  * Package:org.team6
  * Class: Foundations
  *
- * Description: Class representing the foundations
+ * Description: Class representing the foundations piles, a set of four piles, one for each suit
  *
  ********************************************
  */
