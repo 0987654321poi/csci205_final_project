@@ -120,12 +120,30 @@ public class SolitaireController {
      */
     public void addCards() {
         if(theModel.isGameFinished()){
-            VBoxPile1.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/Y.png"))));
-            VBoxPile1.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/O.png"))));
-            VBoxPile1.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/U.png"))));
-            VBoxPile2.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/W.png"))));
-            VBoxPile2.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/I.png"))));
-            VBoxPile2.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/N.png"))));
+            ImageView imView1 = new ImageView(new Image(getClass().getResourceAsStream("/Y.png")));
+            imView1.setFitHeight(50);
+            imView1.setFitWidth(40);
+            VBoxPile1.getChildren().add(imView1);
+            ImageView imView2 = new ImageView(new Image(getClass().getResourceAsStream("/O.png")));
+            imView2.setFitHeight(50);
+            imView2.setFitWidth(40);
+            VBoxPile1.getChildren().add(imView2);
+            ImageView imView3 = new ImageView(new Image(getClass().getResourceAsStream("/U.png")));
+            imView3.setFitHeight(50);
+            imView3.setFitWidth(40);
+            VBoxPile1.getChildren().add(imView3);
+            ImageView imView4 = new ImageView(new Image(getClass().getResourceAsStream("/W.png")));
+            imView4.setFitHeight(50);
+            imView4.setFitWidth(40);
+            VBoxPile2.getChildren().add(imView4);
+            ImageView imView5 = new ImageView(new Image(getClass().getResourceAsStream("/I.png")));
+            imView5.setFitHeight(50);
+            imView5.setFitWidth(40);
+            VBoxPile2.getChildren().add(imView5);
+            ImageView imView6 = new ImageView(new Image(getClass().getResourceAsStream("/N.png")));
+            imView6.setFitHeight(50);
+            imView6.setFitWidth(40);
+            VBoxPile2.getChildren().add(imView6);
         }
         else {
             addStock(theModel);
@@ -138,6 +156,10 @@ public class SolitaireController {
         }
     }
 
+    /**
+     * Adds the top card of each of the foundations piles to the Vbox associated with the Foundations
+     * @param theModel
+     */
     private void addFoundations(SolitaireModel theModel){
         for(int i = 0; i < 4; i++) {
             ImageView imView = new ImageView();
@@ -175,12 +197,21 @@ public class SolitaireController {
         }
     }
 
+    /**
+     * Adds all Cards associated to the Tableau into the corresponding to the Tableau
+     * @param theModel
+     */
     private void addTableau(SolitaireModel theModel) {
         ImageView imageView = new ImageView();
         for (int i = 0; i < theModel.getTheTab().getPiles().size(); i++)
             addPile(theModel,i);
     }
 
+    /**
+     * Adds the cards associated with a Pile into the Vbox corresponding to that pile
+     * @param theModel
+     * @param pileIndex The Index of the Pile within the Tableau
+     */
     private void addPile(SolitaireModel theModel, int pileIndex){
         if(theModel.getTheTab().getPiles().get(pileIndex).getPile().size() == 0) {
             ImageView imView = new ImageView();
@@ -196,6 +227,11 @@ public class SolitaireController {
         }
     }
 
+    /**
+     * Method for adding images to the pile given an Imageview Object and the index of the Pile
+     * @param pileIndex the Index of the pile within the Tableau
+     * @param imView An ImageView object
+     */
     private void addImageToPile(int pileIndex, ImageView imView) {
         imView.setFitHeight(50);
         imView.setFitWidth(40);
@@ -226,6 +262,11 @@ public class SolitaireController {
         }
     }
 
+    /**
+     * Method for adding the Image associated with the top card of the Talon to the Vbox associated
+     * with Talon
+     * @param theModel
+     */
     private void addTalon(SolitaireModel theModel) {
         if(theModel.getTheTalon().getTopCard() != null) {
             ImageView TalonView = new ImageView();
@@ -240,6 +281,11 @@ public class SolitaireController {
         }
     }
 
+    /**
+     * Method for adding the Image associated with the top card of the Stock to the Vbox associated
+     * with Stock
+     * @param theModel
+     */
     private void addStock(SolitaireModel theModel) {
         ImageView StockView = new ImageView();
         if(theModel.getTheStock().getTopCard() != null) {
@@ -256,6 +302,10 @@ public class SolitaireController {
         VBoxStockTalon.getChildren().add(StockView);
     }
 
+    /**
+     * Method for clearing all card images out of all piles and resetting them with the new
+     * cards that occupy the associated piles in the model
+     */
     private void clear(){
         VBoxPile1.getChildren().clear();
         VBoxPile2.getChildren().clear();
@@ -270,6 +320,11 @@ public class SolitaireController {
         initEventHandlers(theModel);
     }
 
+    /**
+     * Sets the events for clicking on cards within the Stock, all piles of the Tableau, and Talon,
+     * as well as the Foundations
+     * @param theGame
+     */
     private void initEventHandlers(SolitaireModel theGame){
         initPileLogic(VBoxPile1, theGame, 0);
         initPileLogic(VBoxPile2, theGame, 1);
@@ -292,6 +347,10 @@ public class SolitaireController {
 
     }
 
+    /**
+     * Initializes logic for first and second click of cards within the talon
+     * @param theModel
+     */
     private void initTalonLogic(SolitaireModel theModel) {
         //The talon
         lblMoves.setText(Integer.toString(theModel.getMoveCounter()));
@@ -318,6 +377,10 @@ public class SolitaireController {
         }
     }
 
+    /**
+     * Initializes the logic for first and second clicks on cards within the stock
+     * @param theModel
+     */
     private void initStockLogic(SolitaireModel theModel) {
         //The stock
         lblMoves.setText(Integer.toString(theModel.getMoveCounter()));
@@ -341,18 +404,24 @@ public class SolitaireController {
         });
     }
 
-    private void initPileLogic(VBox VBoxPile1, SolitaireModel theModel, int index) {
+    /**
+     * Initializes the logic for first and second clicks on cards within the Tableau Piles
+     * @param VBoxPile The pile for which logic is being added
+     * @param theModel the model
+     * @param index The index of the pile within the Tableau
+     */
+    private void initPileLogic(VBox VBoxPile, SolitaireModel theModel, int index) {
         lblMoves.setText(Integer.toString(theModel.getMoveCounter()));
-        VBoxPile1.getChildren().forEach(node -> node.setOnMouseClicked(event ->
+        VBoxPile.getChildren().forEach(node -> node.setOnMouseClicked(event ->
         {
-            int ind = VBoxPile1.getChildren().indexOf(node);
+            int ind = VBoxPile.getChildren().indexOf(node);
             if(!theModel.getSecondClick()) {
-                if(!theModel.getTheTab().getPiles().get(index).getPile().get(VBoxPile1.getChildren().indexOf(node)).getIsFaceUp() == false){
-                    theModel.setTempPile(theModel.getTheTab().getPiles().get(index).split(VBoxPile1.getChildren().indexOf(node)));
+                if(!theModel.getTheTab().getPiles().get(index).getPile().get(VBoxPile.getChildren().indexOf(node)).getIsFaceUp() == false){
+                    theModel.setTempPile(theModel.getTheTab().getPiles().get(index).split(VBoxPile.getChildren().indexOf(node)));
                     theModel.setSecondClickTrue();
 
                     //Add Card Glow
-                        VBoxPile1.getChildren().get(ind).setEffect(new DropShadow(20, Color.GOLD));
+                        VBoxPile.getChildren().get(ind).setEffect(new DropShadow(20, Color.GOLD));
                         theModel.setLastMovedFrom(index);
                 }
             }
@@ -371,6 +440,10 @@ public class SolitaireController {
         }));
     }
 
+    /**
+     * Sets the model that will be used to control the events of the game
+     * @param model an instance of SolitaireModel
+     */
     public void setModel(SolitaireModel model){
         this.theModel = model;
         addCards();

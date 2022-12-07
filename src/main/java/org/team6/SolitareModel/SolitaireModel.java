@@ -90,26 +90,54 @@ public class SolitaireModel {
         }
     }
 
+    /**
+     * Method to check if the game is over if the Foundations is Full
+     * @return Boolean representing if the game is finished
+     */
     public boolean isGameFinished(){
         return theFoundations.gameFinished();
     }
 
+    /**
+     * Simple getter method for Move counter
+     * @return getMoveCounter
+     */
     public int getMoveCounter() { return moveCounter; }
+
+    /**
+     * Simple getter method for LastMovedFrom
+     * @return lastMovedFrom
+     */
     public int getLastMovedFrom(){
         return lastMovedFrom;
     }
 
+    /**
+     * Simple setter Method for lastMovedFrom
+     * @param PilePos an Integer representing what pile was moved From
+     */
     public void setLastMovedFrom(int PilePos){
         lastMovedFrom = PilePos;
     }
 
+    /**
+     * Method for setting secondClick to False
+     */
     public void setSecondClickFalse(){
         secondClick = false;
     }
+
+    /**
+     * Method for setting secondClick to True
+     */
     public void setSecondClickTrue(){
         secondClick = true;
     }
 
+    /**
+     * Simple getter method for secondClick
+     * @return secondClick
+     */
     public Boolean getSecondClick(){
         return this.secondClick;
     }
@@ -125,6 +153,9 @@ public class SolitaireModel {
         }
     }
 
+    /**
+     * Method for drawing a card from the stock to the talon and flipping it
+     */
     public void draw(){
         if(!theStock.isEmpty()) {
             moveCounter++;
@@ -240,10 +271,18 @@ public class SolitaireModel {
         }
     }
 
+    /**
+     * Setter method for the tempPile
+     * @param c an Arraylist of one or more cards
+     */
     public void setTempPile(ArrayList<Card> c){
         this.tempPile = c;
     }
 
+    /**
+     * Simple getter method for tempPile
+     * @return tempPile
+     */
     public ArrayList<Card> getTempPile(){
         return this.tempPile;
     }
