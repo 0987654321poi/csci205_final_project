@@ -427,13 +427,13 @@ public class SolitaireController {
             }
             else {
                 if(theModel.getLastMovedFrom() != index) {
-                    VBoxPile1.getChildren().get(ind).setEffect(null);
+                    VBoxPile.getChildren().get(ind).setEffect(null);
                     theModel.addToPile(index);
                     clear();
                 }
                 else {
                     theModel.reset();
-                    VBoxPile1.getChildren().get(ind).setEffect(null);
+                    VBoxPile.getChildren().get(ind).setEffect(null);
                 }
                 theModel.setSecondClickFalse();
             }
