@@ -59,4 +59,5 @@ org.team6 package, located in /src/main/java, simply run the main method in the 
 from there, a JavaFx tab should come up with our game ready to be played.
 
 ## Link to our Video:
-Put link here
+https://mediaspace.bucknell.edu/media/CSCI205%20Team%206%20Final%20Video%202022/1_58iybvff
+
